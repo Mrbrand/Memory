@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Neonic</title> 
+		<script src="javascript/mustache.js"></script>	
+		<script src="javascript/carbon.js"></script>
+		<script src="javascript/jquery-2.1.3.min.js"></script> 
+	  </head>
+	<body>
+		<h1>Neonic</h1>
+	</body>
+</html>
+	
+<script>
+
+	//Klicka på projekt 
+    $(document).on('click', ".subitem", function() {
+        view_project($(this).parent().find(".project_id").text());
+    });
+    
+</script>
