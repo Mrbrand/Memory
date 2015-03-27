@@ -1,0 +1,80 @@
+body {margin:0;  font-family:Verdana,Tahoma;}
+
+/****************************************************************************/
+/****** HEADER **************************************************************/
+/****************************************************************************/
+
+    #header{
+      padding:5px;
+      background:#345;
+      margin:0;
+      height:45px;
+      font-size: 12pt;
+      color: #FFF;
+      display: block;
+    }
+    
+    .menu-title {margin-left:5px; width:240px; display:block; float:left; text-overflow:ellipsis; white-space:nowrap;overflow: hidden;}
+    .add-button {float:right;  height:35px;  cursor:pointer; display:block;}
+    .back-button {float:left;  height:35px;  cursor:pointer;}
+    .submenu{background:#345;padding:3px;}
+
+/****************************************************************************/
+/****** PAGES ***************************************************************/
+/****************************************************************************/
+
+.page {width:100%; top:0px; background:#456; display:none;}
+.task-icon{margin: 5px 0 0 5px;}
+.week{margin:5px;}
+
+
+/****************************************************************************/
+/****** LISTS ***************************************************************/
+/****************************************************************************/
+
+.subitem{
+  font-size: 10pt;
+  padding-bottom: 3px;
+}
+
+.document{ 
+    background:url('img/itembg.png') center repeat-x;
+    background-size: auto 100%;
+    min-height:57px;
+    color: #333;
+}
+
+.project{ 
+    background:url('img/project-bg.png') center repeat-x;
+    background-size: auto 100%;
+    min-height:57px;
+    color: white;
+}
+
+.subitem-left{height:100%; width:45px; float:left;cursor: pointer;}
+.subitem-center{float:left; padding-top:3px; padding-left:3px; width:300px; cursor:pointer;min-height:50px;}
+.subitem-right{width:50px; min-height: 53px; float:right; background: rgba(30,50,70,0.1);color: grey; font-size: 8pt;}
+
+.title{overflow: hidden; font-weight:bold; height: 17px; float:left; display: block;width:300px;text-overflow:ellipsis;white-space:nowrap;}
+.subitem-next-action{color:#484; float: left;  display: block;  height: 17px; overflow: hidden; width:200px; text-overflow:ellipsis; white-space:nowrap;}
+.subitem-notes {float: left;  display: block;  font-size: 8pt;  height: 15px; overflow: hidden; width:200px; text-overflow:ellipsis; white-space:nowrap;}
+/*.notes {display: block; font: italic 10px Arial; color: #999; height: 12px; overflow: hidden; width:300px; text-overflow:ellipsis; white-space:nowrap;}*/
+.notes {display: block; font: italic 10px Arial; color: #999;overflow: hidden; width:300px;white-space: pre; max-height:100px;}
+.next_action {font-size:10px;  color: #399;  height: 12px; overflow: hidden;}  
+.task_notes {font-size: 8pt;  color: #999;  height: 15px; overflow: hidden;}  
+
+.subitem .category {font-size:7px; display:block;margin-left: 3px;}
+.subitem .status {font-size:8px; display:block;margin-left: 5px;}
+.subitem .prio {font-size:8px; display:block;}
+
+.btn-submit-new-item{width:50px; float:right;}
+.btn-prio-select{float:left; width:50px;margin-right:10px;}
+.control-button{float:left; width:50px;margin: 3px 7px 3px 3px;}
+
+
+
+/****** FORM FIELDS *******/
+textarea {width:100%;  border:0; padding:5px; margin:0; font-size:12pt; color:#555; margin-bottom:2px; font-family:Verdana,Tahoma;box-sizing: border-box;}
+select {  width:100%;  border: 0;  padding:5px;  margin:0;  font-size: 12pt;  color: #555;  margin-bottom: 3px;box-sizing: border-box;}
+input {  width:100%;  margin:0;  font-size: 12pt;  height: 30px;  margin-bottom: 3px;box-sizing: border-box;}
+.btn {  width:100%;  margin:0;  font-size: 12pt;  height: 30px;  margin-bottom: 3px;box-sizing: border-box;}

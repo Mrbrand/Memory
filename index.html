@@ -2,12 +2,152 @@
 <html>
 	<head>
 		<title>Neonic</title> 
+		
+		<link rel="stylesheet" type="text/css" href="style.css">
+		
 		<script src="javascript/mustache.js"></script>	
 		<script src="javascript/carbon.js"></script>
 		<script src="javascript/jquery-2.1.3.min.js"></script> 
-	  </head>
+		<script src="javascript/jquery.tinysort.js"></script>
+	</head>
+	
 	<body>
-		<h1>Neonic</h1>
+	
+	
+	
+		<!--START PAGE -------------->
+			<div id="list" class="page" style="display:block;">
+			  
+			<div id="header">
+				<div class="menu-title">-item-title-</div>
+			</div> <!--end header-->
+			
+			<!--Sub-meny-->
+			<div class="submenu">
+				<img class="back-button" src="img/Arrow1_Left.png"/>
+				<img class="add-button" src="img/Plus.png"/>
+			</div><!-- end controls-->
+			
+			<!-- Projektlista -->
+			<div id="items">
+				<input class="search" placeholder="Search"  style="display:none;"/>
+				<div class="list"></div><!-- här hamnar alla items-->
+			</div><!-- end items--> 
+			
+		</div><!-- end page-->
+
+		
+		
+		
+		<!-- EDIT item ---------------------------------------------------------------------->
+		<div id="edit" class="page">
+			
+			<div id="header">
+				<div class="menu-title">-item-title-</div>
+			</div> <!--end header-->
+			
+			<!--Sub-meny-->
+			<div class="submenu">
+				<img class="back-button" src="img/Arrow1_Left.png"' />
+				<button class="submit-edit-item-form" style="width:70px; float:right;"><img src="img/save.png" /></button>
+				<button class="delete-item" style="width:70px; float:right;"><img src="img/delete2.png" /></button>
+				<button class="finish-item" style="width:70px; float:right;"><img src="img/finish.gif" /></button>
+				<br/><br/>
+			</div><!-- end controls--> 
+			
+			<form id="edit-item-form">
+				<input class="item-title" name="title" type="text" style="margin-bottom:5px;height:40px;"/><br/>
+				item_id:<input class="item-id" name="item_id" type="text" readonly="readonly" style="width:40px;"/> 
+				Parent_id:<input class="item-parent-id" name="parent_id" type="text" style="width:40px;margin-bottom:5px;"/><br/>
+				
+				<select class="item-prio" name="prio" style="margin-bottom:5px;height:40px;">
+					<option value="1">Prio 1</option>
+					<option value="2">Prio 2</option>
+					<option value="3">Prio 3</option>
+					<option value="4">Prio 4</option>
+					<option value="5">Prio 5</option>
+				</select><br/>
+				
+				<select class="item-type" name="type" style="margin-bottom:5px;height:40px;">
+					<option value="1">Koda</option>
+					<option value="2">Skissa</option>
+					<option value="3">Lösa</option>
+					<option value="4">Idé</option>
+					<option value="5">Problem</option>
+					<option value="6">Todo</option>
+					<option value="7">Projekt</option> 
+					<option value="8">Sida</option> 
+					<option value="100">Dokument</option>  
+				</select><br/>
+				
+				<select class="item-size" name="size" style="margin-bottom:5px;height:40px;">
+					<option value="0">--Set size--</option>
+					<option value="1">Quick</option>
+					<option value="2">Small</option>
+					<option value="3">Medium</option>
+					<option value="4">Large</option>
+					<option value="5">XLarge</option>
+				</select><br/>
+				
+				<textarea class="item-notes" name="notes" rows="5" placeholder="Notes"></textarea>
+				<br/><br/><br/><br/><br/>
+			</form>
+		</div><!--edit-item--> 
+
+		
+		
+		
+		
+		<!-- NEW item--------------------------------------------------------------------------->
+		<div id="new" class="page">
+			<div id="header">
+				<img class="back-button" src="img/Arrow1_Left.png" />
+				<button class="btn-submit-new-item">Add</button>
+				<div class="menu-title">NEW item</div>
+			</div> <!--end header-->
+			
+			
+			<form id="new-item-form">
+				<textarea  id="new-item-title" name="title" placeholder="Title" rows="1"></textarea><br/>
+			
+				<select id="new-item-prio" name="prio" style="margin-bottom:5px;height:40px;">
+					<option value="1">Prio 1</option> 
+					<option value="2">Prio 2</option> 
+					<option value="3" selected="selected">Prio 3</option> 
+					<option value="4">Prio 4</option> 
+					<option value="5">Prio 5</option>
+				</select><br/>
+				
+				<select id="new-item-type" name="type" style="margin-bottom:5px;height:40px;">
+					<option value="1">Koda</option>
+					<option value="2">Skissa</option>
+					<option value="3">Lösa</option>
+					<option value="4">Idé</option>
+					<option value="5">Problem</option>
+					<option value="6">Todo</option>
+					<option value="7">Projekt</option> 
+					<option value="8">Sida</option> 
+					<option value="100">Dokument</option> 
+				</select>
+				
+				 <select class="new-item-size" name="size" style="margin-bottom:5px;height:40px;">
+					<option value="0" selected>--Set size--</option>
+					<option value="1">Quick</option>
+					<option value="2">Small</option>
+					<option value="3">Medium</option>
+					<option value="4">Large</option>
+					<option value="5">XLarge</option>
+				</select><br/>
+				
+				<textarea id="new-item-notes" name="notes" placeholder="Notes" rows="5"></textarea>
+				
+				<input type="hidden" class="parent-id" name="parent_id" value="0"/>
+				<input type="hidden" name="status" value="open" placeholder="Status" style="margin-bottom:5px;"/>
+				
+			</form>
+			<br/><br/><br/><br/><br/><br/><br/>
+		</div><!-- end new-item--> 
+	
 	</body>
 </html>
 	
@@ -15,7 +155,14 @@
 
 	//Klicka på projekt 
     $(document).on('click', ".subitem", function() {
-        view_project($(this).parent().find(".project_id").text());
+        view_item($(this).parent().find(".item_id").text());
     });
     
+	//Klicka på projekt 
+    $(document).on('click', ".add-button", function() {
+        console.log($( "#new-item-form" ).serializeArray());
+		
+    });
+    
+	
 </script>
