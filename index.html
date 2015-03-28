@@ -8,7 +8,7 @@
 		<script src="javascript/mustache.js"></script>	
 		<script src="javascript/carbon.js"></script>
 		<script src="javascript/jquery-2.1.3.min.js"></script> 
-		<script src="javascript/jquery.tinysort.js"></script>
+		<script src="javascript/tinysort.js"></script>
 	</head>
 	
 	<body>
@@ -16,7 +16,7 @@
 	
 	
 		<!--START PAGE -------------->
-			<div id="list" class="page" style="display:block;">
+			<div id="start" class="page" style="display:block;">
 			  
 			<div id="header">
 				<div class="menu-title">-item-title-</div>
@@ -31,7 +31,7 @@
 			<!-- Projektlista -->
 			<div id="items">
 				<input class="search" placeholder="Search"  style="display:none;"/>
-				<div class="list"></div><!-- här hamnar alla items-->
+				<div id="list"></div><!-- här hamnar alla items-->
 			</div><!-- end items--> 
 			
 		</div><!-- end page-->
@@ -152,7 +152,7 @@
 </html>
 	
 <script>
-	
+	var current = 0;
 	// .subitem
 	$(document).on('click', ".subitem", function() {
         view_item($(this).parent().find(".item_id").text());
@@ -172,8 +172,19 @@
 	// .back-button
     $(document).on('click', ".back-button", function() {
         $(".page").hide();
-		$("#list").show();
+		$("#start").show();
+		itemList.refresh(0);
     });
 
-	
+	function view_item(project_id) {
+        if(project_id!=-1){
+            //current = itemList.get_item(project_id);
+            itemList.refresh(project_id);
+            //$(".menu-title").html(current.title);
+            $(".page").hide();
+			$("#start").show();
+            //$('div#list>div.subitem').tsort('span.prio',{order:'asc'}, 'span.type',{order:'asc'}, 'div.title',{order:'asc'});
+            //console.log(current);
+        }
+    }
 </script>

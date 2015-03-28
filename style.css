@@ -47,7 +47,7 @@ body {margin:0;  font-family:Verdana,Tahoma;}
 .project{ 
     background:url('img/project-bg.png') center repeat-x;
     background-size: auto 100%;
-    min-height:57px;
+    min-height:70px;
     color: white;
 }
 

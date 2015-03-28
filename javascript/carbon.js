@@ -10,67 +10,76 @@ var itemList = {
 	
 	
 	/* Rensar .list objektet och återskapar alla element via json-array *******/
-	RefreshList : function(project_id) {   
+	refresh : function(item_id) {   
 		
 		//rensa lista
-		$("#projects>.list").empty();
+		$("#list").empty();
 		
 		//filtrera array
-		var filterdata = this.get_subprojects(project_id);
+		var filterdata = this.get_subitems(item_id);
 		var string_object;
 		var item_notes;
 		var item_class;
 		//skapa lista från array
-		filterdata.forEach(function(project) {
-			var subprojects = projectList.get_subprojects(project.project_id,1);
-			subprojects.sort(function(a, b){return a.type-b.type});
-			if(project.type >= 100) item_class = "document";
-			else item_class = "project";
+		filterdata.forEach(function(item) {
+			var subitems = itemList.get_subitems(item.item_id,1);
+			subitems.sort(function(a, b){return a.type-b.type});
+			if(item.type >= 100) item_class = "document";
+			else item_class = "item";
 			
-			if(project.notes!="") item_notes = '<span class="notes">'+project.notes+'</span>';
+			if(item.notes!="") item_notes = '<span class="notes">'+item.notes+'</span>';
 			else item_notes = "";
 			
-			string_object =
-			'<div class="subitem '+item_class+'">'
+			
+			
+			var template =
+			'<div class="subitem project">'
 						
-				+'<div class="subitem-left quick_edit_project">'
-					+'<img class="prio-icon" src="../img/prio'+project.prio+'.png"/>'
-					+'<img class="type-icon" style="margin:4px 3px;" src="../img/type'+project.type+'.png"/>'
-					+'<img class="type-icon" style="margin:0;" src="../img/size'+project.size+'.png"/>'
+				+'<div class="subitem-left quick_edit_item">'
+					+'<img class="prio-icon" src="img/prio{{prio}}.png"/>'
+					+'<img class="type-icon" style="margin:4px 3px;" src="img/type{{type}}.png"/>'
+					+'<img class="type-icon" style="margin:0;" src="img/size{{size}}.png"/>'
 					
 				+'</div>'
 				
 				+'<div class="subitem-center">'
-					+'<div class="title" style="">'+project.title+'</div>'
+					+'<div class="title" style="">{{title}}</div>'
 					+'<div class="next_action_div" style="float:left;">'
-					+item_notes; 
-					subprojects.forEach(function(subproject) {
+					+"{{item_notes}}"; 
+					/*subitems.forEach(function(subitem) {
 					   string_object +=
-						'<img class="type-icon" style="margin:4px 7px;height:10px;" src="../img/type'+subproject.type+'.png"/>'
-						+'<span class="next_action">'+subproject.title+'</span><br/>';                
+						'<img class="type-icon" style="margin:4px 7px;height:10px;" src="img/type'+subitem.type+'.png"/>'
+						+'<span class="next_action">'+subitem.title+'</span><br/>';                
 						
-					});
+					});*/
 				
 				string_object +=
 					'</div>'
 				+'</div><!-- end subitem-center -->'
 				 +'<div style="clear:both;"></div>'
 				//gömda datafält
-				+'<span class="project_id" style="display:none;">'+project.project_id+'</span>'
-				+'<span class="prio" style="display:none;">'+project.prio+'</span>'
-				+'<span class="type" style="display:none;">'+project.type+'</span>'
+				+'<span class="item_id" style="display:none;">{{id}}</span>'
+				+'<span class="prio" style="display:none;">{{prio}}</span>'
+				+'<span class="type" style="display:none;">{{type}}</span>'
 			+'</div><!-- end subitem  -->';
-			 $("#projects>.list").append(string_object);
+			 
+			 
+			 
+			 
+			 //$("#items>.list").append(string_object);
+			 //var template = "<strong>{{id}}:{{title}}</strong><br/>";
+			 var html = Mustache.to_html(template, item);
+			 $("#list").append(html);
 		});
 		 
 	   
 		//sortera listan   
 	},
 	
-	/* returnerar projekt med givet project_id */
-	get_project : function(project_id){
-		return this.projectArray.filter(function (project){
-			return project.project_id == project_id;
+	/* returnerar projekt med givet item_id */
+	get_item : function(item_id){
+		return this.itemArray.filter(function (item){
+			return item.item_id == item_id;
 		})[0];
 	},
 	
@@ -99,29 +108,32 @@ var itemList = {
 		//lägga till id till objektet
 		item["id"] = itemList.get_last_id()+1;
 		
+		//lägga till parent_id till objektet
+		item["parent_id"] = 0;
+		
 		//lägga till objekt i listan
 		this.add_item(item);
 	},
 	
 	
-	remove_project : function(id){
-		for(var i in this.projectArray){
-			if(this.projectArray[i].project_id==id){
-				this.projectArray.splice(i,1);
+	remove_item : function(id){
+		for(var i in this.itemArray){
+			if(this.itemArray[i].item_id==id){
+				this.itemArray.splice(i,1);
 				break;
 				}
 		}
 	},
 	
 	
-	get_subprojects : function(project_id, prio){
-		return this.projectArray.filter(function (project){
+	get_subitems : function(id, prio){
+		return this.itemArray.filter(function (item){
 			//console.log(prio);
 			if (prio === undefined){ 
-				return project.parent_id == project_id;
+				return item.parent_id == id;
 			}
 			else {
-				return project.parent_id == project_id & project.prio == prio;
+				return item.parent_id == id & item.prio == prio;
 			}
 		});
 	}
