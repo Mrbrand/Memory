@@ -74,8 +74,12 @@ var itemList = {
 		})[0];
 	},
 	
-	add_project : function(project){
-		this.projectArray.push(project);
+	get_last_id : function(){
+		return Math.max.apply(Math,this.itemArray.map(function(item){return item.id;}));
+	},
+	
+	add_project : function(item){
+		this.itemArray.push(item);
 	},
 	
 	

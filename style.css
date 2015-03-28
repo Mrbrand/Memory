@@ -15,9 +15,9 @@ body {margin:0;  font-family:Verdana,Tahoma;}
     }
     
     .menu-title {margin-left:5px; width:240px; display:block; float:left; text-overflow:ellipsis; white-space:nowrap;overflow: hidden;}
-    .add-button {float:right;  height:35px;  cursor:pointer; display:block;}
-    .back-button {float:left;  height:35px;  cursor:pointer;}
-    .submenu{background:#345;padding:3px;}
+    .new-button {float:right;}
+    .back-button {float:left;}
+    .submenu{background:#345;padding:3px; height:25px;}
 
 /****************************************************************************/
 /****** PAGES ***************************************************************/

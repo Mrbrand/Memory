@@ -24,8 +24,8 @@
 			
 			<!--Sub-meny-->
 			<div class="submenu">
-				<img class="back-button" src="img/Arrow1_Left.png"/>
-				<img class="add-button" src="img/Plus.png"/>
+				<button class="back-button"><-</button>
+				<button class="new-button">New</button>
 			</div><!-- end controls-->
 			
 			<!-- Projektlista -->
@@ -48,7 +48,7 @@
 			
 			<!--Sub-meny-->
 			<div class="submenu">
-				<img class="back-button" src="img/Arrow1_Left.png"' />
+				<button class="back-button"><-</button>
 				<button class="submit-edit-item-form" style="width:70px; float:right;"><img src="img/save.png" /></button>
 				<button class="delete-item" style="width:70px; float:right;"><img src="img/delete2.png" /></button>
 				<button class="finish-item" style="width:70px; float:right;"><img src="img/finish.gif" /></button>
@@ -101,7 +101,7 @@
 		<!-- NEW item--------------------------------------------------------------------------->
 		<div id="new" class="page">
 			<div id="header">
-				<img class="back-button" src="img/Arrow1_Left.png" />
+				<button class="back-button"><-</button>
 				<button class="btn-submit-new-item">Add</button>
 				<div class="menu-title">NEW item</div>
 			</div> <!--end header-->
@@ -152,17 +152,46 @@
 </html>
 	
 <script>
-
-	//Klicka på projekt 
-    $(document).on('click', ".subitem", function() {
+	
+	// .subitem
+	$(document).on('click', ".subitem", function() {
         view_item($(this).parent().find(".item_id").text());
     });
     
-	//Klicka på projekt 
-    $(document).on('click', ".add-button", function() {
-        console.log($( "#new-item-form" ).serializeArray());
+	// .add-button
+	$(document).on('click', ".new-button", function() {
+   		$(".page").hide();
+		$("#new").show();
+    });
+	
+	// .btn-submit-new-item
+	$(document).on('click', ".btn-submit-new-item", function() {
+        
+		//skapa objekt av formdata
+		var temp = $( "#new-item-form" ).serializeArray();
+		var test = {};
+		for(var i = 0; i <temp.length;i++){
+			temp2 = temp[i];
+			test[temp2["name"]] = temp2["value"];
+		}
 		
+		//lägga till id och startdate till objektet
+		test["start_date"] = new Date().toLocaleString();
+		var new_id = itemList.get_last_id();
+		if (new_id=="-Infinity") new_id=0;
+		test["id"] = new_id+1;
+		
+		//console.log(new_id);
+		
+		//lägga till objekt i listan
+		itemList.add_project(test);
     });
     
+	// .back-button
+    $(document).on('click', ".back-button", function() {
+        $(".page").hide();
+		$("#list").show();
+    });
+
 	
 </script>
