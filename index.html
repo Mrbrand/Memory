@@ -166,25 +166,7 @@
 	
 	// .btn-submit-new-item
 	$(document).on('click', ".btn-submit-new-item", function() {
-        
-		//skapa objekt av formdata
-		var temp = $( "#new-item-form" ).serializeArray();
-		var test = {};
-		for(var i = 0; i <temp.length;i++){
-			temp2 = temp[i];
-			test[temp2["name"]] = temp2["value"];
-		}
-		
-		//lägga till id och startdate till objektet
-		test["start_date"] = new Date().toLocaleString();
-		var new_id = itemList.get_last_id();
-		if (new_id=="-Infinity") new_id=0;
-		test["id"] = new_id+1;
-		
-		//console.log(new_id);
-		
-		//lägga till objekt i listan
-		itemList.add_project(test);
+        itemList.add_from_form("#new-item-form");
     });
     
 	// .back-button

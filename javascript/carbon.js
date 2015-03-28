@@ -75,11 +75,32 @@ var itemList = {
 	},
 	
 	get_last_id : function(){
-		return Math.max.apply(Math,this.itemArray.map(function(item){return item.id;}));
+		last_id = Math.max.apply(Math,this.itemArray.map(function(item){return item.id;}));
+		if (last_id=="-Infinity") last_id=0; //om inget objekt är skapat ännu
+		return last_id;
 	},
 	
-	add_project : function(item){
+	add_item : function(item){
 		this.itemArray.push(item);
+	},
+	
+	add_from_form : function(form_id){
+		//skapa objekt av formdata
+		var temp = $( form_id ).serializeArray();
+		var item = {};
+		for(var i = 0; i <temp.length;i++){
+			temp2 = temp[i];
+			item[temp2["name"]] = temp2["value"];
+		}
+		
+		//lägga till startdate till objektet
+		item["start_date"] = new Date().toLocaleString();
+		
+		//lägga till id till objektet
+		item["id"] = itemList.get_last_id()+1;
+		
+		//lägga till objekt i listan
+		this.add_item(item);
 	},
 	
 	
