@@ -150,7 +150,38 @@
 	
 	</body>
 </html>
+
+
+
+<!-- Mustache template -->
+<script id="item_template" type="text/template">
+	<div class="subitem project">
+						
+				<div class="subitem-left quick_edit_item">
+					<img class="prio-icon" src="img/prio{{prio}}.png"/>
+					<img class="type-icon" style="margin:4px 3px;" src="img/type{{type}}.png"/>
+					<img class="type-icon" style="margin:0;" src="img/size{{size}}.png"/>
+				</div>
+				
+				<div class="subitem-center">
+					<div class="title" style="">{{title}}</div>
+					<div class="next_action_div" style="float:left;">{{item_notes}}	</div>
+				</div><!-- end subitem-center -->
+				 
+				<div style="clear:both;"></div>
+				
+				<span class="item_id" style="display:none;">{{id}}</span>
+				<span class="prio" style="display:none;">{{prio}}</span>
+				<span class="type" style="display:none;">{{type}}</span>
+			
+			</div><!-- end subitem  -->
+</script>	
 	
+	
+	
+	
+	
+<!-- Navigerings script -->	
 <script>
 	var current = 0;
 	// .subitem

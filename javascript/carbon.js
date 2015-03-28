@@ -15,61 +15,19 @@ var itemList = {
 		//rensa lista
 		$("#list").empty();
 		
-		//filtrera array
-		var filterdata = this.get_subitems(item_id);
+		//filtrera itemArray
+		var filterArray = this.get_subitems(item_id);
 		var string_object;
 		var item_notes;
 		var item_class;
-		//skapa lista från array
-		filterdata.forEach(function(item) {
-			var subitems = itemList.get_subitems(item.item_id,1);
-			subitems.sort(function(a, b){return a.type-b.type});
-			if(item.type >= 100) item_class = "document";
-			else item_class = "item";
-			
-			if(item.notes!="") item_notes = '<span class="notes">'+item.notes+'</span>';
-			else item_notes = "";
-			
-			
-			
-			var template =
-			'<div class="subitem project">'
-						
-				+'<div class="subitem-left quick_edit_item">'
-					+'<img class="prio-icon" src="img/prio{{prio}}.png"/>'
-					+'<img class="type-icon" style="margin:4px 3px;" src="img/type{{type}}.png"/>'
-					+'<img class="type-icon" style="margin:0;" src="img/size{{size}}.png"/>'
-					
-				+'</div>'
-				
-				+'<div class="subitem-center">'
-					+'<div class="title" style="">{{title}}</div>'
-					+'<div class="next_action_div" style="float:left;">'
-					+"{{item_notes}}"; 
-					/*subitems.forEach(function(subitem) {
-					   string_object +=
-						'<img class="type-icon" style="margin:4px 7px;height:10px;" src="img/type'+subitem.type+'.png"/>'
-						+'<span class="next_action">'+subitem.title+'</span><br/>';                
-						
-					});*/
-				
-				string_object +=
-					'</div>'
-				+'</div><!-- end subitem-center -->'
-				 +'<div style="clear:both;"></div>'
-				//gömda datafält
-				+'<span class="item_id" style="display:none;">{{id}}</span>'
-				+'<span class="prio" style="display:none;">{{prio}}</span>'
-				+'<span class="type" style="display:none;">{{type}}</span>'
-			+'</div><!-- end subitem  -->';
-			 
-			 
-			 
-			 
-			 //$("#items>.list").append(string_object);
-			 //var template = "<strong>{{id}}:{{title}}</strong><br/>";
-			 var html = Mustache.to_html(template, item);
-			 $("#list").append(html);
+		
+		//skapa lista från filterArray
+		filterArray.forEach(function(item) {
+			/*var subitems = itemList.get_subitems(item.item_id,1);
+			subitems.sort(function(a, b){return a.type-b.type});*/
+			var template = $('#item_template').html();
+			var html = Mustache.to_html(template, item);
+			$("#list").append(html);
 		});
 		 
 	   
