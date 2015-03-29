@@ -52,8 +52,8 @@
 			<div class="submenu">
 				<button class="back-button">Cancel</button>
 				<button class="submit-edit-item-form" style="width:70px; float:right;"><img src="img/save.png" /></button>
-				<button class="delete-item" style="width:70px; float:right;"><img src="img/delete2.png" /></button>
-				<button class="finish-item" style="width:70px; float:right;"><img src="img/finish.gif" /></button>
+				<button class="delete-button" style="width:70px; float:right;"><img src="img/delete2.png" /></button>
+				<button class="finish-button" style="width:70px; float:right;"><img src="img/finish.gif" /></button>
 				<br/><br/>
 			</div><!-- end controls--> 
 			
@@ -287,5 +287,17 @@
 		$(".menu-title").html(current.title);
     });
 	
+	// .delete-button
+    $(document).on('click', ".delete-button", function() {
+		
+		if (confirm('Ta bort "'+current.title+'"?')==true) {
+            itemList.remove_item(current.id);
+			
+			itemList.refresh(current.parent_id);
+			$(".page").hide();
+			$("#start").show();
+			$(".menu-title").html(current.title);
+		}
+    });
 	
 </script>
