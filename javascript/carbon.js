@@ -2,10 +2,15 @@ var itemList = {
 	itemArray: [], //lagrar projektdata
 	
 	
+	
 	/* Hämtar projektdata från angiven källa och lagrar i objektet ************/
 	init : function(key) {     
-		this.itemArray = JSON.parse(window.localStorage.getItem(key));
-		if (this.itemArray==undefined) this.itemArray = {employees: [{id: 0,name: "Coenraets"}]};
+		var array_from_storage = JSON.parse(window.localStorage.getItem(key));
+		
+		if(array_from_storage==null) this.add_item({id:0, parent_id:-1, title:"Root"});
+		else this.itemArray = array_from_storage;
+		//console.log(this.itemArray);
+		//console.log("localstorage: "+window.localStorage.getItem(key));
 	},
 	
 	
@@ -30,14 +35,15 @@ var itemList = {
 			$("#list").append(html);
 		});
 		 
-	   
 		//sortera listan   
+		//tinysort("#list>.subitem",'span.prio');
+		
 	},
 	
 	/* returnerar projekt med givet item_id */
 	get_item : function(item_id){
 		return this.itemArray.filter(function (item){
-			return item.item_id == item_id;
+			return item.id == item_id;
 		})[0];
 	},
 	
@@ -49,6 +55,8 @@ var itemList = {
 	
 	add_item : function(item){
 		this.itemArray.push(item);
+	
+		window.localStorage.setItem("key", JSON.stringify(this.itemArray));
 	},
 	
 	add_from_form : function(form_id){
@@ -66,21 +74,34 @@ var itemList = {
 		//lägga till id till objektet
 		item["id"] = itemList.get_last_id()+1;
 		
-		//lägga till parent_id till objektet
-		item["parent_id"] = 0;
-		
 		//lägga till objekt i listan
+		this.add_item(item);
+	},
+	
+	
+	edit_from_form : function(form_id){
+		//skapa objekt av formdata
+		var temp = $( form_id ).serializeArray();
+		var item = {};
+		for(var i = 0; i <temp.length;i++){
+			temp2 = temp[i];
+			item[temp2["name"]] = temp2["value"];
+		}
+		
+		//byta ut objekt i listan
+		this.remove_item(item.id);
 		this.add_item(item);
 	},
 	
 	
 	remove_item : function(id){
 		for(var i in this.itemArray){
-			if(this.itemArray[i].item_id==id){
+			if(this.itemArray[i].id==id){
 				this.itemArray.splice(i,1);
 				break;
 				}
 		}
+		window.localStorage.setItem("key", JSON.stringify(this.itemArray));
 	},
 	
 	

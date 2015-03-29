@@ -3,6 +3,8 @@
 	<head>
 		<title>Neonic</title> 
 		
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		
 		<link rel="stylesheet" type="text/css" href="style.css">
 		
 		<script src="javascript/mustache.js"></script>	
@@ -24,7 +26,7 @@
 			
 			<!--Sub-meny-->
 			<div class="submenu">
-				<button class="back-button"><-</button>
+				<button class="back-button">Back</button>
 				<button class="new-button">New</button>
 			</div><!-- end controls-->
 			
@@ -48,7 +50,7 @@
 			
 			<!--Sub-meny-->
 			<div class="submenu">
-				<button class="back-button"><-</button>
+				<button class="back-button">Cancel</button>
 				<button class="submit-edit-item-form" style="width:70px; float:right;"><img src="img/save.png" /></button>
 				<button class="delete-item" style="width:70px; float:right;"><img src="img/delete2.png" /></button>
 				<button class="finish-item" style="width:70px; float:right;"><img src="img/finish.gif" /></button>
@@ -57,7 +59,7 @@
 			
 			<form id="edit-item-form">
 				<input class="item-title" name="title" type="text" style="margin-bottom:5px;height:40px;"/><br/>
-				item_id:<input class="item-id" name="item_id" type="text" readonly="readonly" style="width:40px;"/> 
+				item_id:<input class="item-id" name="id" type="text" readonly="readonly" style="width:40px;"/> 
 				Parent_id:<input class="item-parent-id" name="parent_id" type="text" style="width:40px;margin-bottom:5px;"/><br/>
 				
 				<select class="item-prio" name="prio" style="margin-bottom:5px;height:40px;">
@@ -100,11 +102,17 @@
 		
 		<!-- NEW item--------------------------------------------------------------------------->
 		<div id="new" class="page">
+			
 			<div id="header">
-				<button class="back-button"><-</button>
-				<button class="btn-submit-new-item">Add</button>
-				<div class="menu-title">NEW item</div>
+				<div class="menu-title">-new item-</div>
 			</div> <!--end header-->
+			
+			<!--Sub-meny-->
+			<div class="submenu">
+				<button class="cancel-button">Cancel</button>
+				<button class="btn-submit-new-item">Add</button>
+			</div><!-- end controls--> 
+			
 			
 			
 			<form id="new-item-form">
@@ -130,7 +138,7 @@
 					<option value="100">Dokument</option> 
 				</select>
 				
-				 <select class="new-item-size" name="size" style="margin-bottom:5px;height:40px;">
+				 <select id="new-item-size" name="size" style="margin-bottom:5px;height:40px;">
 					<option value="0" selected>--Set size--</option>
 					<option value="1">Quick</option>
 					<option value="2">Small</option>
@@ -141,7 +149,7 @@
 				
 				<textarea id="new-item-notes" name="notes" placeholder="Notes" rows="5"></textarea>
 				
-				<input type="hidden" class="parent-id" name="parent_id" value="0"/>
+				<input type="hidden" name="parent_id" id="new-parent-id" value="0"/>
 				<input type="hidden" name="status" value="open" placeholder="Status" style="margin-bottom:5px;"/>
 				
 			</form>
@@ -157,24 +165,24 @@
 <script id="item_template" type="text/template">
 	<div class="subitem project">
 						
-				<div class="subitem-left quick_edit_item">
-					<img class="prio-icon" src="img/prio{{prio}}.png"/>
-					<img class="type-icon" style="margin:4px 3px;" src="img/type{{type}}.png"/>
-					<img class="type-icon" style="margin:0;" src="img/size{{size}}.png"/>
-				</div>
-				
-				<div class="subitem-center">
-					<div class="title" style="">{{title}}</div>
-					<div class="next_action_div" style="float:left;">{{item_notes}}	</div>
-				</div><!-- end subitem-center -->
-				 
-				<div style="clear:both;"></div>
-				
-				<span class="item_id" style="display:none;">{{id}}</span>
-				<span class="prio" style="display:none;">{{prio}}</span>
-				<span class="type" style="display:none;">{{type}}</span>
-			
-			</div><!-- end subitem  -->
+		<div class="subitem-left quick_edit_item">
+			<img class="prio-icon" src="img/prio{{prio}}.png"/>
+			<img class="type-icon" style="margin:4px 3px;" src="img/type{{type}}.png"/>
+			<img class="type-icon" style="margin:0;" src="img/size{{size}}.png"/>
+		</div>
+		
+		<div class="subitem-center">
+			<div class="title" style="">{{title}}</div>
+			<div class="next_action_div" style="float:left;">{{item_notes}}	</div>
+		</div><!-- end subitem-center -->
+		 
+		<div style="clear:both;"></div>
+		
+		<span class="item_id" style="display:none;">{{id}}</span>
+		<span class="prio" style="display:none;">{{prio}}</span>
+		<span class="type" style="display:none;">{{type}}</span>
+	
+	</div><!-- end subitem  -->
 </script>	
 	
 	
@@ -183,39 +191,101 @@
 	
 <!-- Navigerings script -->	
 <script>
-	var current = 0;
-	// .subitem
-	$(document).on('click', ".subitem", function() {
-        view_item($(this).parent().find(".item_id").text());
+	
+	// Uppstart
+	var current = {id:0, parent_id:0, title:"Alla"};
+	itemList.init("key");
+	itemList.refresh(0);
+	
+	
+	// .subitem-left (edit)
+	$(document).on('click', ".subitem-left", function() {
+		
+		var current_id = $(this).parent().find(".item_id").text();
+		current = itemList.get_item(current_id);
+        console.log(current.id);
+		$(".menu-title").html("Edit: "+current.title);
+		
+        $("input.item-id").val(current_id);
+        $("input.item-title").val(current.title);
+        $("textarea.item-notes").val(current.notes);
+		$(".item-prio").val(current.prio);
+        $(".item-type").val(current.type);
+        $(".item-size").val(current.size);
+        $("input.item-parent-id").val(current.parent_id);
+		
+		/*$("input.item-category").val(current.category);
+        $("input.item-create-date").val(current.date_create);
+        $("input.item-finish-date").val(current.date_finished);*/
+				
+		$(".page").hide();
+		$("#edit").show();
     });
     
-	// .add-button
+	
+	// .subitem-center
+	$(document).on('click', ".subitem-center", function() {
+		var current_id = $(this).parent().find(".item_id").text();
+		current = itemList.get_item(current_id);
+		console.log(current.id);
+		
+		$(".menu-title").html(current.title);
+		itemList.refresh($(this).parent().find(".item_id").text());
+    });
+    
+	// .new-button
 	$(document).on('click', ".new-button", function() {
    		$(".page").hide();
+		$("#new").show();
+		
+		$(".menu-title").html("New: "+current.title);
+        $("input.item-id").val(current.id);
+        $("#new-item-title").val("");
+        $("#new-item-prio").val("2");
+       // $("#new-item-type").val("1");
+        $("#new-item-notes").val("");
+        $("#new-item-size").val("0");
+        $("#new-parent-id").val(current.id);
+		$(".page").hide();
 		$("#new").show();
     });
 	
 	// .btn-submit-new-item
 	$(document).on('click', ".btn-submit-new-item", function() {
         itemList.add_from_form("#new-item-form");
+		itemList.refresh(current.id);
+		$(".page").hide();
+		$("#start").show();
     });
-    
+	
+	// .btn-submit-edit-item
+	$(document).on('click', ".submit-edit-item-form", function() {
+        itemList.edit_from_form("#edit-item-form");
+		current = itemList.get_item(current.parent_id);
+		itemList.refresh(current.id);
+		$(".page").hide();
+		$("#start").show();
+		
+    });
+	
+	
 	// .back-button
     $(document).on('click', ".back-button", function() {
-        $(".page").hide();
+		current = itemList.get_item(current.parent_id);
+		itemList.refresh(current.id);
+		console.log(current.id);
+		
+		$(".menu-title").html(current.title);
+		$(".page").hide();
 		$("#start").show();
-		itemList.refresh(0);
     });
 
-	function view_item(project_id) {
-        if(project_id!=-1){
-            //current = itemList.get_item(project_id);
-            itemList.refresh(project_id);
-            //$(".menu-title").html(current.title);
-            $(".page").hide();
-			$("#start").show();
-            //$('div#list>div.subitem').tsort('span.prio',{order:'asc'}, 'span.type',{order:'asc'}, 'div.title',{order:'asc'});
-            //console.log(current);
-        }
-    }
+	// .cancel-button
+    $(document).on('click', ".cancel-button", function() {
+        $(".page").hide();
+		$("#start").show();
+		$(".menu-title").html(current.title);
+    });
+	
+	
 </script>
