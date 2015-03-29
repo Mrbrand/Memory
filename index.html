@@ -21,7 +21,7 @@
 			<div id="start" class="page" style="display:block;">
 			  
 			<div id="header">
-				<div class="menu-title">-item-title-</div>
+				<div class="menu-title">Root</div>
 			</div> <!--end header-->
 			
 			<!--Sub-meny-->
@@ -197,7 +197,9 @@
 	itemList.init("key");
 	itemList.refresh(0);
 	
-	
+	if(current.id == 0) $(".back-button").hide(); 
+	else $(".back-button").show();
+
 	// .subitem-left (edit)
 	$(document).on('click', ".subitem-left", function() {
 		
@@ -229,6 +231,9 @@
 		current = itemList.get_item(current_id);
 		console.log(current.id);
 		
+		if(current.id == 0) $(".back-button").hide(); 
+		else $(".back-button").show();
+				
 		$(".menu-title").html(current.title);
 		itemList.refresh($(this).parent().find(".item_id").text());
     });
@@ -274,6 +279,9 @@
 		current = itemList.get_item(current.parent_id);
 		itemList.refresh(current.id);
 		console.log(current.id);
+		
+		if(current.id == 0) $(".back-button").hide(); 
+		else $(".back-button").show();
 		
 		$(".menu-title").html(current.title);
 		$(".page").hide();
