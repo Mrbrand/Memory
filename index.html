@@ -195,17 +195,14 @@
 	// Uppstart
 	var current = {id:0, parent_id:0, title:"Alla"};
 	itemList.init("key");
-	itemList.refresh(0);
-	
-	if(current.id == 0) $(".back-button").hide(); 
-	else $(".back-button").show();
+	view_item(0);
 
 	// .subitem-left (edit)
 	$(document).on('click', ".subitem-left", function() {
 		
 		var current_id = $(this).parent().find(".item_id").text();
 		current = itemList.get_item(current_id);
-        console.log(current.id);
+        //console.log(current.id);
 		$(".menu-title").html("Edit: "+current.title);
 		
         $("input.item-id").val(current_id);
@@ -240,9 +237,7 @@
     
 	// .new-button
 	$(document).on('click', ".new-button", function() {
-   		$(".page").hide();
-		$("#new").show();
-		
+ 
 		$(".menu-title").html("New: "+current.title);
         $("input.item-id").val(current.id);
         $("#new-item-title").val("");
@@ -251,6 +246,7 @@
         $("#new-item-notes").val("");
         $("#new-item-size").val("0");
         $("#new-parent-id").val(current.id);
+		
 		$(".page").hide();
 		$("#new").show();
     });
@@ -258,41 +254,25 @@
 	// .btn-submit-new-item
 	$(document).on('click', ".btn-submit-new-item", function() {
         itemList.add_from_form("#new-item-form");
-		itemList.refresh(current.id);
-		$(".page").hide();
-		$("#start").show();
+		view_item(current.id);
     });
 	
 	// .btn-submit-edit-item
 	$(document).on('click', ".submit-edit-item-form", function() {
         itemList.edit_from_form("#edit-item-form");
-		current = itemList.get_item(current.parent_id);
-		itemList.refresh(current.id);
-		$(".page").hide();
-		$("#start").show();
+		view_item(current.parent_id);
 		
     });
 	
 	
 	// .back-button
     $(document).on('click', ".back-button", function() {
-		current = itemList.get_item(current.parent_id);
-		itemList.refresh(current.id);
-		console.log(current.id);
-		
-		if(current.id == 0) $(".back-button").hide(); 
-		else $(".back-button").show();
-		
-		$(".menu-title").html(current.title);
-		$(".page").hide();
-		$("#start").show();
+		view_item(current.parent_id);
     });
 
 	// .cancel-button
     $(document).on('click', ".cancel-button", function() {
-        $(".page").hide();
-		$("#start").show();
-		$(".menu-title").html(current.title);
+        view_item(current.id);
     });
 	
 	// .delete-button
@@ -300,12 +280,20 @@
 		
 		if (confirm('Ta bort "'+current.title+'"?')==true) {
             itemList.remove_item(current.id);
-			
-			itemList.refresh(current.parent_id);
-			$(".page").hide();
-			$("#start").show();
-			$(".menu-title").html(current.title);
+			view_item(current.parent_id);
 		}
     });
+	
+	function view_item (id) {
+		current = itemList.get_item(id);
+		itemList.refresh(id);
+		$(".menu-title").html(current.title);
+		
+		if(current.id == 0) $("#start>.submenu>.back-button").hide(); 
+		else $("#start>.submenu>.back-button").show();
+	
+		$(".page").hide();
+		$("#start").show();
+	}
 	
 </script>

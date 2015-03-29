@@ -7,7 +7,7 @@ var itemList = {
 	init : function(key) {     
 		var array_from_storage = JSON.parse(window.localStorage.getItem(key));
 		
-		if(array_from_storage==null) this.add_item({id:0, parent_id:-1, title:"Root"});
+		if(array_from_storage==null) this.add_item({id:0, parent_id:-1, title:"Root", prio:1});
 		else this.itemArray = array_from_storage;
 		//console.log(this.itemArray);
 		//console.log("localstorage: "+window.localStorage.getItem(key));
@@ -36,7 +36,7 @@ var itemList = {
 		});
 		 
 		//sortera listan   
-		//tinysort("#list>.subitem",'span.prio');
+		tinysort("#list>.subitem",'span.prio');
 		
 	},
 	
