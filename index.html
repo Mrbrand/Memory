@@ -173,7 +173,13 @@
 		
 		<div class="subitem-center">
 			<div class="title" style="">{{title}}</div>
-			<div class="next_action_div" style="float:left;">{{item_notes}}	</div>
+			<div class="next_action_div" style="float:left;">
+				{{#notes}}<span class="notes">{{notes}}</span>{{/notes}}
+				{{#subitems}}
+					<img style="margin:4px 0px 4px 5px;height:10px;vertical-align: text-top;" src="img/type{{type}}.png"/>
+					<span class="next_action">{{title}}</span><br/>  
+				{{/subitems}}
+			</div>
 		</div><!-- end subitem-center -->
 		 
 		<div style="clear:both;"></div>

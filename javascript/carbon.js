@@ -22,14 +22,12 @@ var itemList = {
 		
 		//filtrera itemArray
 		var filterArray = this.get_subitems(item_id);
-		var string_object;
-		var item_notes;
-		var item_class;
 		
 		//skapa lista från filterArray
 		filterArray.forEach(function(item) {
-			/*var subitems = itemList.get_subitems(item.item_id,1);
-			subitems.sort(function(a, b){return a.type-b.type});*/
+			item.subitems = itemList.get_subitems(item.id,1);
+			console.log(item);
+			//subitems.sort(function(a, b){return a.type-b.type});
 			var template = $('#item_template').html();
 			var html = Mustache.to_html(template, item);
 			$("#list").append(html);
