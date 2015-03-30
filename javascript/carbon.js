@@ -26,7 +26,6 @@ var itemList = {
 		//skapa lista från filterArray
 		filterArray.forEach(function(item) {
 			item.subitems = itemList.get_subitems(item.id,1);
-			console.log(item);
 			//subitems.sort(function(a, b){return a.type-b.type});
 			var template = $('#item_template').html();
 			var html = Mustache.to_html(template, item);
@@ -34,7 +33,7 @@ var itemList = {
 		});
 		 
 		//sortera listan   
-		tinysort("#list>.subitem",'span.prio');
+		if (filterArray.length != 0) tinysort("#list>.subitem",'span.prio');
 		
 	},
 	
