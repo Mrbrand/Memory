@@ -7,7 +7,14 @@ var itemList = {
 	init : function(key) {     
 		var array_from_storage = JSON.parse(window.localStorage.getItem(key));
 		
-		if(array_from_storage==null) this.add_item({id:0, parent_id:-1, title:"Root", prio:1});
+		//exempeldata vid nystart
+		if(array_from_storage==null) {
+			this.add_item({id:0, parent_id:-1, title:"Root", prio:1, size:0});
+			this.add_item({id:1, parent_id:0, title:"Familj", prio:1, type:8, size:0});
+			this.add_item({id:2, parent_id:0, title:"Jobbet", prio:1, type:8, size:0});
+			this.add_item({id:3, parent_id:0, title:"Nöje", prio:1, type:8, size:0});
+			this.add_item({id:4, parent_id:3, title:"Leka med Neonic", prio:1, type:6, size:0});
+		}
 		else this.itemArray = array_from_storage;
 		//console.log(this.itemArray);
 		//console.log("localstorage: "+window.localStorage.getItem(key));
