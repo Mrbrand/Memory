@@ -11,3 +11,8 @@ But none of them completely satisfies my requirements.
 * Preview subtasks
 * Filter by prio
 * Filter by type
+
+##Background
+As the description says, the app is built with Phonegap. To be honest i tried to install phonegap and cordova but failed miserably due to my lack of knowledge. 
+Then i got a tip from a friend: http://build.phonegap.com  
+This terrific page does all the work for me. It just pulls the code from github and gives me the compiled .apk file. Brilliant! Thank you Adobe!
