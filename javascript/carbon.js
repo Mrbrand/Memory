@@ -2,8 +2,6 @@ var itemList = {
 	itemArray: [], //lagrar projektdata
 	
 	
-	
-	/* Hämtar projektdata från angiven källa och lagrar i objektet ************/
 	init : function(key) {     
 		var array_from_storage = JSON.parse(window.localStorage.getItem(key));
 		
@@ -21,35 +19,47 @@ var itemList = {
 	},
 	
 	
-	/* Rensar .list objektet och återskapar alla element via json-array *******/
 	refresh : function(item_id) {   
 		
 		//rensa lista
-		$("#list").empty();
+		$("#open").empty();
+		$("#finished").empty();
 		
 		//filtrera itemArray
-		var filterArray = this.get_subitems(item_id);
+		var open_items = this.get_open_subitems(item_id);
+		var finished_items = this.get_finished_subitems(item_id);
 		
-		//skapa lista från filterArray
-		filterArray.forEach(function(item) {
-			item.subitems = itemList.get_subitems(item.id,1);
-			//subitems.sort(function(a, b){return a.type-b.type});
-			var template = $('#item_template').html();
+		
+		//Fylla #open med 
+		open_items.forEach(function(item) {
+			item.subitems = itemList.get_open_subitems(item.id,1);
+			item.subitems.sort(function(a, b){return a.type-b.type});
+			var template = $('#open_items_template').html();
 			var html = Mustache.to_html(template, item);
-			$("#list").append(html);
+			$("#open").append(html);
 		});
-		 
-		//sortera listan   
-		if (filterArray.length != 0) tinysort("#list>.subitem",'span.prio');
+		//sortera listan med öppna  
+		if (open_items.length != 0) tinysort("#open>.subitem",'span.prio');
+		
+		
+		finished_items.forEach(function(item) {
+			item.subitems = itemList.get_open_subitems(item.id,1);
+			item.subitems.sort(function(a, b){return a.type-b.type});
+			var template = $('#finished_items_template').html();
+			var html = Mustache.to_html(template, item);
+			$("#finished").append(html);
+		});
+		//sortera listan med avslutade 
+		if (finished_items.length != 0) tinysort("#finished>.subitem",{selector:'span.next_action',order:'desc'});
 		
 	},
 	
-	/* returnerar projekt med givet item_id */
 	get_item : function(item_id){
 		return this.itemArray.filter(function (item){
 			return item.id == item_id;
 		})[0];
 	},
+
 	
 	get_last_id : function(){
 		last_id = Math.max.apply(Math,this.itemArray.map(function(item){return item.id;}));
@@ -57,12 +67,14 @@ var itemList = {
 		return last_id;
 	},
 	
+
 	add_item : function(item){
 		this.itemArray.push(item);
 	
 		window.localStorage.setItem("key", JSON.stringify(this.itemArray));
 	},
 	
+
 	add_from_form : function(form_id){
 		//skapa objekt av formdata
 		var temp = $( form_id ).serializeArray();
@@ -109,15 +121,34 @@ var itemList = {
 	},
 	
 	
-	get_subitems : function(id, prio){
+	finish_item : function(id){
+		for(var i in this.itemArray){
+			if(this.itemArray[i].id==id){
+				this.itemArray[i]['finish_date'] = new Date().toLocaleString();
+				break;
+				}
+		}
+		window.localStorage.setItem("key", JSON.stringify(this.itemArray));
+	},
+	
+	
+	get_open_subitems : function(id){
 		return this.itemArray.filter(function (item){
-			//console.log(prio);
-			if (prio === undefined){ 
-				return item.parent_id == id;
-			}
-			else {
-				return item.parent_id == id & item.prio == prio;
-			}
+			return item.parent_id == id & item.finish_date === undefined;
 		});
-	}
+	},
+	
+	get_finished_subitems : function(id){
+		return this.itemArray.filter(function (item){
+			return item.parent_id == id & item.finish_date !== undefined;
+		});
+	},
+	
+	
+	get_type_items : function(type){
+		return this.itemArray.filter(function (item){
+		 	return item.type == type;
+		});
+	},
+	
 }
