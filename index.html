@@ -28,6 +28,7 @@
 			  
 			<div id="header">
 				<div class="menu-title">Root</div>
+				<img class="menu-button" src="img/menu-button.png"  style="float:right; margin:5px;"/>
 			</div> <!--end header-->
 			
 			<!--Sub-meny-->
@@ -54,12 +55,13 @@
 			
 			<div id="header">
 				<div class="menu-title">-item-title-</div>
+				<img class="menu-button" src="img/menu-button.png"  style="float:right; margin:5px;"/>
 			</div> <!--end header-->
 			
 			<!--Sub-meny-->
 			<div class="submenu">
 				<button class="back-button">Cancel</button>
-				<button class="submit-edit-item-form" style="width:70px; float:right;"><img src="img/save.png" /></button>
+				<button class="save-button" style="width:70px; float:right;"><img src="img/save.png" /></button>
 				<button class="delete-button" style="width:70px; float:right;"><img src="img/delete2.png" /></button>
 				<button class="finish-button" style="width:70px; float:right;"><img src="img/finish.gif" /></button>
 				<br/><br/>
@@ -113,12 +115,13 @@
 			
 			<div id="header">
 				<div class="menu-title">-new item-</div>
+				<img class="menu-button" src="img/menu-button.png"  style="float:right; margin:5px;"/>
 			</div> <!--end header-->
 			
 			<!--Sub-meny-->
 			<div class="submenu">
 				<button class="cancel-button">Cancel</button>
-				<button class="btn-submit-new-item">Add</button>
+				<button class="add-button">Add</button>
 			</div><!-- end controls--> 
 			
 			
@@ -163,6 +166,27 @@
 			</form>
 			<br/><br/><br/><br/><br/><br/><br/>
 		</div><!-- end new-item--> 
+	
+	</body>
+</html>
+
+
+
+<!-- MENU -------------------------------------------------------------------------->
+		<div id="menu" class="page">
+			
+			<div id="header">
+				<div class="menu-title">MENU</div>
+				<img class="cancel-button" src="img/menu-button.png"  style="float:right; margin:5px;"/>
+			</div> <!--end header-->
+			
+			<!--Sub-meny-->
+			<div class="submenu">
+				<button class="cancel-button">Cancel</button>
+			</div><!-- end controls--> 
+		<button onclick="itemList.cleardata(); view_item(0);" style="margin:10px;">Clear data</button><br/>
+		<button onclick="itemList.testdata(); itemList.refresh(0);view_item(0);" style="margin:10px;">Test data (50000 randomized items)</button>
+		</div><!-- end menu--> 
 	
 	</body>
 </html>
@@ -236,25 +260,27 @@
 	// Uppstart
 	var current = {id:0, parent_id:0, title:"Alla"};
 	itemList.init("key");
+	if (itemList.itemArray.length==1) itemList.exampledata();
 	view_item(0);
 
-	// .subitem-left (edit)
+
+	// .subitem-left (visa edit-läge)
 	$(document).on('click', ".subitem-left", function() {
 		
 		var current_id = $(this).parent().find(".item_id").text();
 		current = itemList.get_item(current_id);
-        //console.log(current.id);
+    
 		$(".menu-title").html("Edit: "+current.title);
 		
-        $("input.item-id").val(current_id);
-        $("input.item-title").val(current.title);
-        $("textarea.item-notes").val(current.notes);
+     	$("input.item-id").val(current_id);
+     	$("input.item-title").val(current.title);
+     	$("textarea.item-notes").val(current.notes);
 		$(".item-prio").val(current.prio);
-        $(".item-type").val(current.type);
-        $(".item-size").val(current.size);
-        $("input.item-parent-id").val(current.parent_id);
+     	$(".item-type").val(current.type);
+     	$(".item-size").val(current.size);
+     	$("input.item-parent-id").val(current.parent_id);
 		
-		/*$("input.item-category").val(current.category);
+			/*$("input.item-category").val(current.category);
         $("input.item-create-date").val(current.date_create);
         $("input.item-finish-date").val(current.date_finished);*/
 				
@@ -263,7 +289,7 @@
     });
     
 	
-	// .subitem-center
+	// .subitem-center (visa subitems)
 	$(document).on('click', ".subitem-center", function() {
 		var current_id = $(this).parent().find(".item_id").text();
 		current = itemList.get_item(current_id);
@@ -276,35 +302,36 @@
 		itemList.refresh($(this).parent().find(".item_id").text());
     });
     
+    
+    
 	// .new-button
 	$(document).on('click', ".new-button", function() {
  
 		$(".menu-title").html("New: "+current.title);
-        $("input.item-id").val(current.id);
-        $("#new-item-title").val("");
-        $("#new-item-prio").val("2");
-       // $("#new-item-type").val("1");
-        $("#new-item-notes").val("");
-        $("#new-item-size").val("0");
-        $("#new-parent-id").val(current.id);
+      $("input.item-id").val(current.id);
+      $("#new-item-title").val("");
+      $("#new-item-prio").val("2");
+      //$("#new-item-type").val("6");   // visar senaste om bortkommenterad
+      $("#new-item-notes").val("");
+      $("#new-item-size").val("0");
+      $("#new-parent-id").val(current.id);
 		
 		$(".page").hide();
 		$("#new").show();
     });
 	
-	// .btn-submit-new-item
-	$(document).on('click', ".btn-submit-new-item", function() {
+	// .add-button
+	$(document).on('click', ".add-button", function() {
         itemList.add_from_form("#new-item-form");
 		view_item(current.id);
     });
 	
-	// .btn-submit-edit-item
-	$(document).on('click', ".submit-edit-item-form", function() {
+	// .save-button
+	$(document).on('click', ".save-button", function() {
         itemList.edit_from_form("#edit-item-form");
 		view_item(current.parent_id);
 		
     });
-	
 	
 	// .back-button
     $(document).on('click', ".back-button", function() {
@@ -324,7 +351,8 @@
 			view_item(current.parent_id);
 		}
     });
-	
+    
+    // .finish-button
 	$(document).on('click', ".finish-button", function() {
 		
 		if (confirm('Finish "'+current.title+'"?')==true) {
@@ -332,6 +360,14 @@
 			view_item(current.parent_id);
 		}
     });
+	
+	// .menu-button
+    $(document).on('click', ".menu-button", function() {
+        	$(".page").hide();
+			$("#menu").show();
+    });
+	
+	
 	
 	function view_item (id) {
 		current = itemList.get_item(id);

@@ -68,7 +68,7 @@ body {margin:0;  font-family:Verdana,Tahoma;}
 .subitem .status {font-size:8px; display:block;margin-left: 5px;}
 .subitem .prio {font-size:8px; display:block;}
 
-.btn-submit-new-item{width:50px; float:right;}
+.add-button{width:50px; float:right;}
 .btn-prio-select{float:left; width:50px;margin-right:10px;}
 .control-button{float:left; width:50px;margin: 3px 7px 3px 3px;}
 
