@@ -67,7 +67,7 @@ var itemList = {
 			$("#open").append(html);
 		});
 		//sortera listan med öppna  
-		if (open_items.length != 0) tinysort("#open>.subitem",'span.prio');
+		if (open_items.length != 0) tinysort("#open>.subitem",'span.prio', {selector:'span.size',order:'asc'}, {selector:'span.type',order:'asc'});
 		
 		
 		finished_items.forEach(function(item) {
@@ -183,6 +183,6 @@ var itemList = {
 		return this.itemArray.filter(function (item){
 		 	return item.type == type;
 		});
-	},
+	}
 	
 }

@@ -23,8 +23,8 @@
 	
 	
 	
-		<!--START PAGE -------------->
-			<div id="start" class="page" style="display:block;">
+		<!--TREE PAGE -------------->
+			<div id="tree" class="page" style="display:block;">
 			  
 			<div id="header">
 				<div class="menu-title">Root</div>
@@ -34,19 +34,61 @@
 			<!--Sub-meny-->
 			<div class="submenu">
 				<button class="back-button">Back</button>
+				<button class="search-button">Search</button>
 				<button class="new-button">New</button>
+				
 			</div><!-- end controls-->
 			
 			<!-- Projektlista -->
 			<div id="items">
 				<input class="search" placeholder="Search"  style="display:none;"/>
-				<div id="open"></div><!-- här hamnar alla items-->
+				<div id="open"></div>
 				<br/>
-				<div id="finished"></div><!-- här hamnar alla items-->
+				<div id="finished"></div>
 			</div><!-- end items--> 
 			
 		</div><!-- end page-->
 
+		
+		
+		<!--SEARCH PAGE -------------->
+			<div id="search" class="page" style="display:block;">
+			  
+			<div id="header">
+				<div class="menu-title">Root</div>
+			</div> <!--end header-->
+			
+			<!--Sub-meny-->
+			<div class="submenu">
+				<button class="cancel-button">Tree</button>
+				<select class="type-filter" style="width:100px;">
+					<option value="6">-General Task</option>
+                    <option value="14">-Home</option>
+        			<option value="9">-Telephone</option>
+					<option value="10">-Computer</option>
+                    <option value="11">-Away</option>
+                    <option value="12">-Planning</option>
+					<option value="4">-Idea</option>
+                    <option value="5">-Problem</option>
+					<option value="7">-Project</option> 
+					<option value="13">-Category</option> 
+					<option value="100">-Document</option>  
+					<option disabled>Programming:</option>
+					<option value="1">-Coding</option>  
+					<option value="2">-Sketch</option>
+					<option value="3">-Solve</option>
+					<option value="8">-Page</option>  
+				</select>
+				
+				<input class="search" placeholder="Search" style="width:100px;"/>
+			</div><!-- end controls-->
+			
+			<!-- ItemLista -->
+			<div id="items">
+				<div id="filtered"></div>
+			</div><!-- end items--> 
+			
+		</div><!-- end page-->
 		
 		
 		
@@ -81,15 +123,22 @@
 				</select><br/>
 				
 				<select class="item-type" name="type" style="margin-bottom:5px;height:40px;">
-					<option value="1">Koda</option>
-					<option value="2">Skissa</option>
-					<option value="3">Lösa</option>
-					<option value="4">Idé</option>
-					<option value="5">Problem</option>
-					<option value="6">Todo</option>
-					<option value="7">Projekt</option> 
-					<option value="8">Sida</option> 
-					<option value="100">Dokument</option>  
+					<option value="6">-General Task</option>
+                    <option value="14">-Home</option>
+        			<option value="9">-Telephone</option>
+					<option value="10">-Computer</option>
+                    <option value="11">-Away</option>
+                    <option value="12">-Planning</option>
+					<option value="4">-Idea</option>
+                    <option value="5">-Problem</option>
+					<option value="7">-Project</option> 
+					<option value="13">-Category</option> 
+					<option value="100">-Document</option>  
+					<option disabled>Programming:</option>
+					<option value="1">-Coding</option>  
+					<option value="2">-Sketch</option>
+					<option value="3">-Solve</option>
+					<option value="8">-Page</option>  
 				</select><br/>
 				
 				<select class="item-size" name="size" style="margin-bottom:5px;height:40px;">
@@ -138,15 +187,22 @@
 				</select><br/>
 				
 				<select id="new-item-type" name="type" style="margin-bottom:5px;height:40px;">
-					<option value="1">Koda</option>
-					<option value="2">Skissa</option>
-					<option value="3">Lösa</option>
-					<option value="4">Idé</option>
-					<option value="5">Problem</option>
-					<option value="6">Todo</option>
-					<option value="7">Projekt</option> 
-					<option value="8">Sida</option> 
-					<option value="100">Dokument</option> 
+					<option value="6">-General Task</option>
+                    <option value="14">-Home</option>
+        			<option value="9">-Telephone</option>
+					<option value="10">-Computer</option>
+                    <option value="11">-Away</option>
+                    <option value="12">-Planning</option>
+					<option value="4">-Idea</option>
+                    <option value="5">-Problem</option>
+					<option value="7">-Project</option> 
+					<option value="13">-Category</option> 
+					<option value="100">-Document</option>  
+					<option disabled>Programming:</option>
+					<option value="1">-Coding</option>  
+					<option value="2">-Sketch</option>
+					<option value="3">-Solve</option>
+					<option value="8">-Page</option>  
 				</select>
 				
 				 <select id="new-item-size" name="size" style="margin-bottom:5px;height:40px;">
@@ -219,6 +275,7 @@
 		<span class="item_id" style="display:none;">{{id}}</span>
 		<span class="prio" style="display:none;">{{prio}}</span>
 		<span class="type" style="display:none;">{{type}}</span>
+		<span class="size" style="display:none;">{{size}}</span>
 	
 	</div><!-- end subitem  -->
 </script>	
@@ -326,6 +383,7 @@
 		view_item(current.id);
     });
 	
+	
 	// .save-button
 	$(document).on('click', ".save-button", function() {
         itemList.edit_from_form("#edit-item-form");
@@ -361,6 +419,7 @@
 		}
     });
 	
+
 	// .menu-button
     $(document).on('click', ".menu-button", function() {
         	$(".page").hide();
@@ -369,16 +428,22 @@
 	
 	
 	
+	$(document).on('click', ".search-button", function() {
+		$(".page").hide();
+		$("#search").show();
+    });
+
+	
 	function view_item (id) {
 		current = itemList.get_item(id);
 		itemList.refresh(id);
 		$(".menu-title").html(current.title);
 		
-		if(current.id == 0) $("#start>.submenu>.back-button").hide(); 
-		else $("#start>.submenu>.back-button").show();
+		if(current.id == 0) $("#tree>.submenu>.back-button").hide(); 
+		else $("#tree>.submenu>.back-button").show();
 	
 		$(".page").hide();
-		$("#start").show();
+		$("#tree").show();
 	}
 	
 </script>

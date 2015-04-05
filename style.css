@@ -53,14 +53,14 @@ body {margin:0;  font-family:Verdana,Tahoma;}
 }
 
 .subitem-left{height:100%; width:45px; float:left;cursor: pointer;}
-.subitem-center{float:left; padding-top:3px; padding-left:3px; width:300px; cursor:pointer;min-height:50px;}
+.subitem-center{float:left; padding-top:3px; padding-left:3px; width:auto; cursor:pointer;min-height:50px;}
 .subitem-right{width:50px; min-height: 53px; float:right; background: rgba(30,50,70,0.1);color: grey; font-size: 8pt;}
 
-.title{overflow: hidden; font-weight:bold; height: 17px; float:left; display: block;width:300px;text-overflow:ellipsis;white-space:nowrap;}
+.title{overflow: hidden; font-weight:bold; height: 17px; float:left; display: block; width:100%;overflow: hidden;}
 .subitem-next-action{color:#484; float: left;  display: block;  height: 17px; overflow: hidden; width:200px; text-overflow:ellipsis; white-space:nowrap;}
 .subitem-notes {float: left;  display: block;  font-size: 8pt;  height: 15px; overflow: hidden; width:200px; text-overflow:ellipsis; white-space:nowrap;}
 /*.notes {display: block; font: italic 10px Arial; color: #999; height: 12px; overflow: hidden; width:300px; text-overflow:ellipsis; white-space:nowrap;}*/
-.notes {display: block; font: italic 10px Arial; color: #999;overflow: hidden; width:300px;white-space: pre; max-height:100px;}
+.notes {display: block; font: italic 10px Arial; color: #999;overflow: hidden; width:100%;white-space: pre; max-height:100px;}
 .next_action {font-size:10px;  color: #399;  height: 12px; overflow: hidden;}  
 .task_notes {font-size: 8pt;  color: #999;  height: 15px; overflow: hidden;}  
 
