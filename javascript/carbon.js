@@ -48,7 +48,7 @@ var itemList = {
 		
 		//Fylla #open med 
 		open_items.forEach(function(item) {
-			item.subitems = itemList.get_open_subitems(item.id,1);
+			item.subitems = itemList.get_prio1_subitems(item.id,1);
 			item.subitems.sort(function(a, b){return a.type-b.type});
 			var template = $('#open_items_template').html();
 			var html = Mustache.to_html(template, item);
@@ -151,6 +151,12 @@ var itemList = {
 	get_open_subitems : function(id){
 		return this.itemArray.filter(function (item){
 			return item.parent_id == id & item.finish_date === undefined;
+		});
+	},
+	
+	get_prio1_subitems : function(id){
+		return this.itemArray.filter(function (item){
+			return item.parent_id == id & item.finish_date === undefined & item.prio==1;
 		});
 	},
 	
