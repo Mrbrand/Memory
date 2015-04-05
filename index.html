@@ -23,8 +23,8 @@
 	
 	
 	
-		<!--START PAGE -------------->
-			<div id="start" class="page" style="display:block;">
+		<!--TREE PAGE -------------->
+			<div id="tree" class="page" style="display:block;">
 			  
 			<div id="header">
 				<div class="menu-title">Root</div>
@@ -33,19 +33,61 @@
 			<!--Sub-meny-->
 			<div class="submenu">
 				<button class="back-button">Back</button>
+				<button class="search-button">Search</button>
 				<button class="new-button">New</button>
+				
 			</div><!-- end controls-->
 			
 			<!-- Projektlista -->
 			<div id="items">
 				<input class="search" placeholder="Search"  style="display:none;"/>
-				<div id="open"></div><!-- här hamnar alla items-->
+				<div id="open"></div>
 				<br/>
-				<div id="finished"></div><!-- här hamnar alla items-->
+				<div id="finished"></div>
 			</div><!-- end items--> 
 			
 		</div><!-- end page-->
 
+		
+		
+		<!--SEARCH PAGE -------------->
+			<div id="search" class="page" style="display:block;">
+			  
+			<div id="header">
+				<div class="menu-title">Root</div>
+			</div> <!--end header-->
+			
+			<!--Sub-meny-->
+			<div class="submenu">
+				<button class="cancel-button">Tree</button>
+				<select class="type-filter" style="width:100px;">
+					<option value="6">-General Task</option>
+                    <option value="14">-Home</option>
+        			<option value="9">-Telephone</option>
+					<option value="10">-Computer</option>
+                    <option value="11">-Away</option>
+                    <option value="12">-Planning</option>
+					<option value="4">-Idea</option>
+                    <option value="5">-Problem</option>
+					<option value="7">-Project</option> 
+					<option value="13">-Category</option> 
+					<option value="100">-Document</option>  
+					<option disabled>Programming:</option>
+					<option value="1">-Coding</option>  
+					<option value="2">-Sketch</option>
+					<option value="3">-Solve</option>
+					<option value="8">-Page</option>  
+				</select>
+				
+				<input class="search" placeholder="Search" style="width:100px;"/>
+			</div><!-- end controls-->
+			
+			<!-- ItemLista -->
+			<div id="items">
+				<div id="filtered"></div>
+			</div><!-- end items--> 
+			
+		</div><!-- end page-->
 		
 		
 		
@@ -59,7 +101,7 @@
 			<!--Sub-meny-->
 			<div class="submenu">
 				<button class="back-button">Cancel</button>
-				<button class="submit-edit-item-form" style="width:70px; float:right;"><img src="img/save.png" /></button>
+				<button class="save-button" style="width:70px; float:right;"><img src="img/save.png" /></button>
 				<button class="delete-button" style="width:70px; float:right;"><img src="img/delete2.png" /></button>
 				<button class="finish-button" style="width:70px; float:right;"><img src="img/finish.gif" /></button>
 				<br/><br/>
@@ -209,6 +251,7 @@
 		<span class="item_id" style="display:none;">{{id}}</span>
 		<span class="prio" style="display:none;">{{prio}}</span>
 		<span class="type" style="display:none;">{{type}}</span>
+		<span class="size" style="display:none;">{{size}}</span>
 	
 	</div><!-- end subitem  -->
 </script>	
@@ -313,7 +356,7 @@
     });
 	
 	// .btn-submit-edit-item
-	$(document).on('click', ".submit-edit-item-form", function() {
+	$(document).on('click', ".save-button", function() {
         itemList.edit_from_form("#edit-item-form");
 		view_item(current.parent_id);
 		
@@ -347,16 +390,22 @@
 		}
     });
 	
+	
+	$(document).on('click', ".search-button", function() {
+		$(".page").hide();
+		$("#search").show();
+    });
+	
 	function view_item (id) {
 		current = itemList.get_item(id);
 		itemList.refresh(id);
 		$(".menu-title").html(current.title);
 		
-		if(current.id == 0) $("#start>.submenu>.back-button").hide(); 
-		else $("#start>.submenu>.back-button").show();
+		if(current.id == 0) $("#tree>.submenu>.back-button").hide(); 
+		else $("#tree>.submenu>.back-button").show();
 	
 		$(".page").hide();
-		$("#start").show();
+		$("#tree").show();
 	}
 	
 </script>
