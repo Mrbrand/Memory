@@ -4,8 +4,14 @@
 		<title>Neonic</title> 
 		
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta content="minimum-scale=1.0, width=device-width, maximum-scale=0.6667, user-scalable=no" name="viewport" />
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+		<meta content="yes" name="apple-mobile-web-app-capable" />
+		<meta content="text/html; charset=iso-8859-1" http-equiv="Content-Type" />
+		<link rel="apple-touch-icon" href="img/icon.png"/>
 		
-		<link rel="stylesheet" type="text/css" href="style.css">
+		<link rel="stylesheet" type="text/css" href="style.css"/>
+		<link rel="stylesheet" type="text/css" href="carbon.css"/>
 		
 		<script language="JavaScript" type="text/javascript" src="javascript/mustache.js"></script>	
 		<script language="JavaScript" type="text/javascript" src="javascript/carbon.js"></script>
@@ -33,7 +39,9 @@
 			<!-- Projektlista -->
 			<div id="items">
 				<input class="search" placeholder="Search"  style="display:none;"/>
-				<div id="list"></div><!-- här hamnar alla items-->
+				<div id="open"></div><!-- här hamnar alla items-->
+				<br/>
+				<div id="finished"></div><!-- här hamnar alla items-->
 			</div><!-- end items--> 
 			
 		</div><!-- end page-->
@@ -161,8 +169,8 @@
 
 
 
-<!-- Mustache template -->
-<script id="item_template" type="text/template">
+<!-- Mustache template öppna-->
+<script id="open_items_template" type="text/template">
 	<div class="subitem project">
 						
 		<div class="subitem-left quick_edit_item">
@@ -192,6 +200,33 @@
 </script>	
 	
 	
+<!-- Mustache template avslutade -->
+<script id="finished_items_template" type="text/template">
+	<div class="subitem finished project">
+						
+		<div class="subitem-left quick_edit_item">
+			<img class="prio-icon" src="img/prio{{prio}}.png"/>
+			<img class="type-icon" style="margin:4px 3px;" src="img/type{{type}}.png"/>
+			<img class="type-icon" style="margin:0;" src="img/size{{size}}.png"/>
+		</div>
+		
+		<div class="subitem-center">
+			<div class="title" style="">{{title}}</div>
+			<div class="next_action_div" style="float:left;">
+				<span class="next_action">{{finish_date}}</span>
+				{{#notes}}<span class="notes">{{notes}}</span>{{/notes}}
+				
+			</div>
+		</div><!-- end subitem-center -->
+		 
+		<div style="clear:both;"></div>
+		
+		<span class="item_id" style="display:none;">{{id}}</span>
+		<span class="prio" style="display:none;">{{prio}}</span>
+		<span class="type" style="display:none;">{{type}}</span>
+	
+	</div><!-- end subitem  -->
+</script>	
 	
 	
 	
@@ -255,8 +290,6 @@
 		
 		$(".page").hide();
 		$("#new").show();
-		
-		console.log("hej");
     });
 	
 	// .btn-submit-new-item
@@ -286,8 +319,16 @@
 	// .delete-button
     $(document).on('click', ".delete-button", function() {
 		
-		if (confirm('Ta bort "'+current.title+'"?')==true) {
+		if (confirm('Delete "'+current.title+'"?')==true) {
             itemList.remove_item(current.id);
+			view_item(current.parent_id);
+		}
+    });
+	
+	$(document).on('click', ".finish-button", function() {
+		
+		if (confirm('Finish "'+current.title+'"?')==true) {
+            itemList.finish_item(current.id);
 			view_item(current.parent_id);
 		}
     });
