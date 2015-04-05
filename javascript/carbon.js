@@ -9,11 +9,27 @@ var itemList = {
 		
 		//exempeldata vid nystart
 		if(array_from_storage==null) {
-			this.add_item({id:0, parent_id:-1, title:"Root", prio:1, size:0});
-			this.add_item({id:1, parent_id:0, title:"Familj", prio:1, type:8, size:0});
-			this.add_item({id:2, parent_id:0, title:"Jobbet", prio:1, type:8, size:0});
-			this.add_item({id:3, parent_id:0, title:"Nöje", prio:1, type:8, size:0});
-			this.add_item({id:4, parent_id:3, title:"Leka med Neonic", prio:1, type:6, size:0});
+			this.add_item({id:0, parent_id:-1, title:"Root", prio:1, size:0, type:13});
+			var parent_id = 1;
+			var id = 1;
+			var prio;
+			var size;
+			var type;
+			for (n=0; n<5;n++){
+				for (m=0; m<10;m++){
+					for (l=0; l<10;l++){
+				  		for (k=0; k<10;k++){
+					 		for (i=0;i<10;i++){
+								//itemArray.push({id:id++, parent_id: 10*l+k});
+								prio = Math.floor((Math.random() * 5)+1);
+								size = Math.floor((Math.random() * 6));
+								type = Math.floor((Math.random() * 13)+1);
+								this.itemArray.push({id:id++, parent_id: 1000*n+100*m+10*l+k, title:id, type:type, size:size, prio:prio});
+			 				}
+		  				}
+					}
+				}
+			}
 		}
 		else this.itemArray = array_from_storage;
 		//console.log(this.itemArray);
