@@ -309,7 +309,7 @@
 	// Uppstart
 	var current = {id:0, parent_id:0, title:"Alla"};
 	itemList.init("key");
-	if (itemList.itemArray.length==1) itemList.exampledata();
+	if (itemList.itemArray==undefined) itemList.exampledata();
 	view_item(0);
 
 
