@@ -34,7 +34,6 @@
 			<!--Sub-meny-->
 			<div class="submenu">
 				<button class="back-button">Back</button>
-				<button class="search-button">Search</button>
 				<button class="new-button">New</button>
 				
 			</div><!-- end controls-->
@@ -61,15 +60,15 @@
 			<!--Sub-meny-->
 			<div class="submenu">
 				<button class="cancel-button">Tree</button>
-				<select class="type-filter" style="width:100px;">
+				<select class="type-filter" onchange="itemList.filtered(this.value); console.log('hej');" style="width:100px;">
 					<option value="6">-General Task</option>
-                    <option value="14">-Home</option>
+               <option value="14">-Home</option>
         			<option value="9">-Telephone</option>
 					<option value="10">-Computer</option>
-                    <option value="11">-Away</option>
-                    <option value="12">-Planning</option>
+               <option value="11">-Away</option>
+               <option value="12">-Planning</option>
 					<option value="4">-Idea</option>
-                    <option value="5">-Problem</option>
+               <option value="5">-Problem</option>
 					<option value="7">-Project</option> 
 					<option value="13">-Category</option> 
 					<option value="100">-Document</option>  
@@ -155,10 +154,6 @@
 			</form>
 		</div><!--edit-item--> 
 
-		
-		
-		
-		
 		<!-- NEW item--------------------------------------------------------------------------->
 		<div id="new" class="page">
 			
@@ -235,13 +230,10 @@
 				<div class="menu-title">MENU</div>
 				<img class="cancel-button" src="img/menu-button.png"  style="float:right; margin:5px;"/>
 			</div> <!--end header-->
-			
-			<!--Sub-meny-->
-			<div class="submenu">
-				<button class="cancel-button">Cancel</button>
-			</div><!-- end controls--> 
-		<button onclick="itemList.cleardata(); view_item(0);" style="margin:10px;">Clear data</button><br/>
-		<button onclick="itemList.testdata(); itemList.refresh(0);view_item(0);" style="margin:10px;">Test data (50000 randomized items)</button>
+		<span style="color:white;">These functions are experimental, use with caution!</span> <br/>
+		<button onclick="if (confirm('Previous data will be erased!')==true) {itemList.cleardata(); view_item(0);}" style="margin:10px;">Clear data</button><br/>
+		<button onclick="if (confirm('Previous data will be erased!')==true) {itemList.testdata(); itemList.refresh(0);view_item(0);}" style="margin:10px;">Test data (50000 randomized items)</button><br/>
+		<button class="search-button" style="margin:10px;">Search</button>
 		</div><!-- end menu--> 
 	
 	</body>

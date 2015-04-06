@@ -42,6 +42,7 @@ var itemList = {
 		this.add_item({id:0, parent_id:-1, title:"Root", prio:1, size:0});
 	},
 	
+	
 	init : function(key) {     
 		var array_from_storage = JSON.parse(window.localStorage.getItem(key));
 		this.itemArray = array_from_storage;
@@ -82,6 +83,25 @@ var itemList = {
 		
 	},
 	
+	
+	filtered : function(type, query) {   
+		//rensa lista
+		$("#filtered").empty();
+
+		//filtrera itemArray
+		var filtered_items = this.get_type_items(type);
+		console.log(items);
+		filtered_items.forEach(function(item) {
+			var template = $('#open_items_template').html();
+			var html = Mustache.to_html(template, item);
+			$("#filtered").append(html);
+		});
+		
+		//sortera listan med filtrerade 
+		if (filtered_items.length != 0) tinysort("#filtered>.subitem",{selector:'span.prio',order:'asc'}, {selector:'span.size',order:'asc'} );
+	},
+	
+	
 	get_item : function(item_id){
 		return this.itemArray.filter(function (item){
 			return item.id == item_id;
@@ -98,7 +118,6 @@ var itemList = {
 
 	add_item : function(item){
 		this.itemArray.push(item);
-	
 		window.localStorage.setItem("key", JSON.stringify(this.itemArray));
 	},
 	
@@ -181,7 +200,7 @@ var itemList = {
 	
 	get_type_items : function(type){
 		return this.itemArray.filter(function (item){
-		 	return item.type == type;
+		 	return item.type == type & item.finish_date === undefined;
 		});
 	}
 	
