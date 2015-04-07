@@ -54,13 +54,14 @@
 			<div id="search" class="page" style="display:block;">
 			  
 			<div id="header">
-				<div class="menu-title">Search</div>
+				<div style="float:left;">Search</div>
 				<img class="cancel-button" src="img/tree-icon.png"  style="float:right; margin:5px; cursor:pointer;"/>
 			</div> <!--end header-->
 			
 			<!--Sub-meny-->
 			<div class="submenu">
-				<select class="type-filter" onchange="itemList.filtered(this.value); console.log('hej');" style="width:100px;">
+				<select class="type-filter" onchange="itemList.filtered(this.value); console.log('hej');">
+					<option value="all">-ALL-</option>
 					<option value="6">-General Task</option>
                <option value="14">-Home</option>
         			<option value="9">-Telephone</option>
@@ -79,7 +80,7 @@
 					<option value="8">-Page</option>  
 				</select>
 				
-				<input class="search" placeholder="Search" style="width:100px;"/>
+				<!input class="search" placeholder="Search" style="width:100px;"/>
 			</div><!-- end controls-->
 			
 			<!-- ItemLista -->
@@ -96,7 +97,6 @@
 			
 			<div id="header">
 				<div class="menu-title">-item-title-</div>
-				<img class="menu-button" src="img/menu-button.png"  style="float:right; margin:5px;"/>
 			</div> <!--end header-->
 			
 			<!--Sub-meny-->
@@ -142,11 +142,11 @@
 				
 				<select class="item-size" name="size" style="margin-bottom:5px;height:40px;">
 					<option value="0">--Set size--</option>
-					<option value="1">Quick</option>
-					<option value="2">Small</option>
-					<option value="3">Medium</option>
-					<option value="4">Large</option>
-					<option value="5">XLarge</option>
+					<option value="1">Quick (5min)</option>
+					<option value="2">Small (<15min)</option>
+					<option value="3">Medium (<1h)</option>
+					<option value="4">Large (<3h)</option>
+					<option value="5">XLarge (>3h)</option>
 				</select><br/>
 				
 				<textarea class="item-notes" name="notes" rows="5" placeholder="Notes"></textarea>
@@ -159,7 +159,6 @@
 			
 			<div id="header">
 				<div class="menu-title">-new item-</div>
-				<img class="menu-button" src="img/menu-button.png"  style="float:right; margin:5px;"/>
 			</div> <!--end header-->
 			
 			<!--Sub-meny-->
@@ -202,11 +201,11 @@
 				
 				 <select id="new-item-size" name="size" style="margin-bottom:5px;height:40px;">
 					<option value="0" selected>--Set size--</option>
-					<option value="1">Quick</option>
-					<option value="2">Small</option>
-					<option value="3">Medium</option>
-					<option value="4">Large</option>
-					<option value="5">XLarge</option>
+					<option value="1">Quick (5min)</option>
+					<option value="2">Small (<15min)</option>
+					<option value="3">Medium (<1h)</option>
+					<option value="4">Large (<3h)</option>
+					<option value="5">XLarge (>3h)</option>
 				</select><br/>
 				
 				<textarea id="new-item-notes" name="notes" placeholder="Notes" rows="5"></textarea>
@@ -223,17 +222,17 @@
 
 
 
-<!-- MENU -------------------------------------------------------------------------->
+<!-- MENU >
 		<div id="menu" class="page">
 			
 			<div id="header">
 				<div class="menu-title">MENU</div>
 				<img class="cancel-button" src="img/menu-button.png"  style="float:right; margin:5px;"/>
 			</div> <!--end header-->
-		<span style="color:white;">These functions are experimental, use with caution!</span> <br/>
-		<button onclick="if (confirm('Previous data will be erased!')==true) {itemList.cleardata(); view_item(0);}" style="margin:10px;">Clear data</button><br/>
-		<button onclick="if (confirm('Previous data will be erased!')==true) {itemList.testdata(); itemList.refresh(0);view_item(0);}" style="margin:10px;">Test data (50000 randomized items)</button><br/>
-		<button class="search-button" style="margin:10px;">Search</button>
+			<!--span style="color:white;">These functions are experimental, use with caution!</span> <br/>
+			<button onclick="if (confirm('Previous data will be erased!')==true) {itemList.cleardata(); view_item(0);}" style="margin:10px;">Clear data</button><br/>
+			<button onclick="if (confirm('Previous data will be erased!')==true) {itemList.testdata(); itemList.refresh(0);view_item(0);}" style="margin:10px;">Test data (50000 randomized items)</button><br/>
+			<button class="search-button" style="margin:10px;">Search</button>
 		</div><!-- end menu--> 
 	
 	</body>
@@ -310,8 +309,9 @@
 	var current = {id:0, parent_id:0, title:"Alla"};
 	itemList.init("key");
 	if (itemList.itemArray==undefined) itemList.exampledata();
+	itemList.filtered("all");
 	view_item(0);
-
+	
 
 	// .subitem-left (visa edit-läge)
 	$(document).on('click', ".subitem-left", function() {
@@ -416,7 +416,7 @@
     });
 	
 	
-	
+	// .search-button
 	$(document).on('click', ".search-button", function() {
 		$(".page").hide();
 		$("#search").show();

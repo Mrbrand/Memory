@@ -199,8 +199,14 @@ var itemList = {
 	
 	
 	get_type_items : function(type){
-		return this.itemArray.filter(function (item){
-		 	return item.type == type & item.finish_date === undefined;
+		
+		if (type!="all")
+			return this.itemArray.filter(function (item){
+			 	return item.type == type & item.finish_date === undefined;
+			});
+		
+		else return this.itemArray.filter(function (item){
+			 	return item.id !=0;
 		});
 	}
 	
