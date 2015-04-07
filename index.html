@@ -28,7 +28,7 @@
 			  
 			<div id="header">
 				<div class="menu-title">Root</div>
-				<img class="menu-button" src="img/menu-button.png"  style="float:right; margin:5px;"/>
+				<img class="search-button" src="img/search-icon.png"  style="float:right; margin:5px; cursor:pointer;"/>
 			</div> <!--end header-->
 			
 			<!--Sub-meny-->
@@ -54,12 +54,12 @@
 			<div id="search" class="page" style="display:block;">
 			  
 			<div id="header">
-				<div class="menu-title">Root</div>
+				<div class="menu-title">Search</div>
+				<img class="cancel-button" src="img/tree-icon.png"  style="float:right; margin:5px; cursor:pointer;"/>
 			</div> <!--end header-->
 			
 			<!--Sub-meny-->
 			<div class="submenu">
-				<button class="cancel-button">Tree</button>
 				<select class="type-filter" onchange="itemList.filtered(this.value); console.log('hej');" style="width:100px;">
 					<option value="6">-General Task</option>
                <option value="14">-Home</option>
@@ -102,9 +102,9 @@
 			<!--Sub-meny-->
 			<div class="submenu">
 				<button class="back-button">Cancel</button>
-				<button class="save-button" style="width:70px; float:right;"><img src="img/save.png" /></button>
-				<button class="delete-button" style="width:70px; float:right;"><img src="img/delete2.png" /></button>
-				<button class="finish-button" style="width:70px; float:right;"><img src="img/finish.gif" /></button>
+				<button class="save-button" style="width:70px; float:right;margin-left:5px;"><img src="img/save.png" /></button>
+				<button class="delete-button" style="width:70px; float:right;margin-left:5px;"><img src="img/delete2.png" /></button>
+				<button class="finish-button" style="width:70px; float:right;margin-left:5px;"><img src="img/finish.gif" /></button>
 				<br/><br/>
 			</div><!-- end controls--> 
 			
