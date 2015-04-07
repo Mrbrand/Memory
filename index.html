@@ -404,11 +404,8 @@
     
     // .finish-button
 	$(document).on('click', ".finish-button", function() {
-		
-		if (confirm('Finish "'+current.title+'"?')==true) {
-            itemList.finish_item(current.id);
+         itemList.finish_item(current.id);
 			view_item(current.parent_id);
-		}
     });
 	
 
