@@ -17,7 +17,7 @@ body {margin:0;  font-family:Verdana,Tahoma;}
     .menu-title {margin-left:5px; width:240px; display:block; float:left; text-overflow:ellipsis; white-space:nowrap;overflow: hidden;}
     .new-button {float:right;}
     .back-button {float:left;}
-	.cancel-button {float:left;}
+	 .cancel-button {float:left;}
     .submenu{background:#345;padding:5px; height:33px;}
 
 
@@ -97,15 +97,15 @@ button:active {
     color: white;
 }
 
-.subitem-left{height:100%; width:45px; float:left;cursor: pointer;}
-.subitem-center{float:left; padding-top:3px; padding-left:3px; width:auto; cursor:pointer;min-height:50px;}
-.subitem-right{width:50px; min-height: 53px; float:right; background: rgba(30,50,70,0.1);color: grey; font-size: 8pt;}
+.subitem-center{    width:auto;    padding-top:3px;     padding-left:3px;     overflow:hidden;    cursor:pointer;}
+.subitem-left{ height:100%;   width:45px;    float:left;    cursor:pointer;}
 
-.title{overflow: hidden; font-weight:bold; height: 17px; float:left; display: block; width:100%;overflow: hidden;}
+.title{overflow: hidden; font-weight:bold; height: 17px; float:left; display: block; width:100%;}
+.notes {display: block; font: italic 10px Arial; color: #999; max-height:100px; margin-right:5px;}
 .subitem-next-action{color:#484; float: left;  display: block;  height: 17px; overflow: hidden; width:200px; text-overflow:ellipsis; white-space:nowrap;}
 .subitem-notes {float: left;  display: block;  font-size: 8pt;  height: 15px; overflow: hidden; width:200px; text-overflow:ellipsis; white-space:nowrap;}
 /*.notes {display: block; font: italic 10px Arial; color: #999; height: 12px; overflow: hidden; width:300px; text-overflow:ellipsis; white-space:nowrap;}*/
-.notes {display: block; font: italic 10px Arial; color: #999;overflow: hidden; width:100%;white-space: pre; max-height:100px;}
+
 .next_action {font-size:10px;  color: #399;  height: 12px; overflow: hidden;}  
 .task_notes {font-size: 8pt;  color: #999;  height: 15px; overflow: hidden;}  
 
