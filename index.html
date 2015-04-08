@@ -42,7 +42,6 @@
 			<div id="items">
 				<input class="search" placeholder="Search"  style="display:none;"/>
 				<div id="open"></div>
-				<br/>
 				<div id="finished"></div>
 			</div><!-- end items--> 
 			
@@ -109,7 +108,7 @@
 			</div><!-- end controls--> 
 			
 			<form id="edit-item-form">
-				<input class="item-title" name="title" type="text" style="margin-bottom:5px;height:40px;"/><br/>
+				<input class="item-title" name="title" type="text" style="margin-bottom:5px;height:50px; font-size:1.3em"/><br/>
 				item_id:<input class="item-id" name="id" type="text" readonly="readonly" style="width:40px;"/> 
 				Parent_id:<input class="item-parent-id" name="parent_id" type="text" style="width:40px;margin-bottom:5px;"/><br/>
 				
@@ -341,14 +340,7 @@
 	// .subitem-center (visa subitems)
 	$(document).on('click', ".subitem-center", function() {
 		var current_id = $(this).parent().find(".item_id").text();
-		current = itemList.get_item(current_id);
-		console.log(current.id);
-		
-		if(current.id == 0) $(".back-button").hide(); 
-		else $(".back-button").show();
-				
-		$(".menu-title").html(current.title);
-		itemList.refresh($(this).parent().find(".item_id").text());
+		view_item (current_id);
     });
     
     

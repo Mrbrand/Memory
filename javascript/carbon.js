@@ -81,6 +81,8 @@ var itemList = {
 		//sortera listan med avslutade 
 		if (finished_items.length != 0) tinysort("#finished>.subitem",{selector:'span.next_action',order:'desc'});
 		
+		if (finished_items.length == 0 & open_items.length==0) $("#open").append("<div class='empty'>No items here</div>");
+		
 	},
 	
 	
@@ -99,6 +101,8 @@ var itemList = {
 		
 		//sortera listan med filtrerade 
 		if (filtered_items.length != 0) tinysort("#filtered>.subitem",{selector:'span.prio',order:'asc'}, {selector:'span.size',order:'asc'} );
+		
+		else $("#filtered").append("<div class='empty'>No items here</div>");
 	},
 	
 	
@@ -206,7 +210,7 @@ var itemList = {
 			});
 		
 		else return this.itemArray.filter(function (item){
-			 	return item.id !=0;
+			 	return 1;
 		});
 	}
 	
