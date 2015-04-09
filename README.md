@@ -1,5 +1,6 @@
 # WiseGuy
 Task manager with HTML, JS and local storage
+![alt tag](https://raw.github.com/Mrbrand/WiseGuy/master/img/screenshot.png)
 
 # Demo 
 Klick this link to open the latest version of WiseGuy:
@@ -16,4 +17,4 @@ But none of them completely satisfies my requirements.
 * Filter by prio
 * Filter by type
 
-![alt tag](https://raw.github.com/Mrbrand/WiseGuy/master/img/screenshot.png)
+
