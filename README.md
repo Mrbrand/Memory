@@ -1,5 +1,8 @@
-# Neonic
+# WiseGuy
 Task manager with HTML, JS and local storage
+
+# Demo 
+https://rawgit.com/Mrbrand/WiseGuy/blob/master/index.html
 
 ##Why make another task app?
 Well, I have tested a whole lot of task manager apps throughout the years. 
