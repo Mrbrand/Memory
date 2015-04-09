@@ -11,3 +11,5 @@ But none of them completely satisfies my requirements.
 * Preview subtasks
 * Filter by prio
 * Filter by type
+
+![alt tag](https://raw.github.com/Mrbrand/WiseGuy/master/img/screenshot.png)
