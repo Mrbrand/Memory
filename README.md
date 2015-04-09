@@ -2,6 +2,7 @@
 Task manager with HTML, JS and local storage
 
 # Demo 
+Klick this link to open the latest version of WiseGuy
 https://rawgit.com/Mrbrand/WiseGuy/blob/master/index.html
 
 ##Why make another task app?
