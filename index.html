@@ -42,7 +42,6 @@
 			
 			<!-- Projektlista -->
 			<div id="items">
-				<input class="search" placeholder="Search"  style="display:none;"/>
 				<div id="open"></div>
 				<div id="finished"></div>
 			</div><!-- end items--> 
@@ -56,12 +55,17 @@
 			  
 			<div id="header">
 				<div style="float:left;">Search</div>
-				<img class="cancel-button" src="img/tree-icon.png"  style="float:right; margin:5px; cursor:pointer;"/>
+				<img class="tree-button" src="img/tree-icon.png"  style="float:right; margin:5px; cursor:pointer;"/>
 			</div> <!--end header-->
 			
 			<!--Sub-meny-->
 			<div class="submenu">
-				<select class="type-filter" onchange="itemList.filtered(this.value); console.log('hej');">
+				
+				<!--Search input-->
+				<input class="search" onkeyup="view_filter();" placeholder="Search string" style="width:45%;"/>
+				
+				<!--Select type-->
+				<select class="type-filter" onchange="view_filter();">
 					<option value="all">-ALL-</option>
 					<option value="6">-General Task</option>
                <option value="14">-Home</option>
@@ -81,7 +85,7 @@
 					<option value="8">-Page</option>  
 				</select>
 				
-				<input class="search" onkeyup="search(this.value);" placeholder="Search" style="width:100px;"/>
+				
 			</div><!-- end controls-->
 			
 			<!-- ItemLista -->
@@ -102,7 +106,7 @@
 			
 			<!--Sub-meny-->
 			<div class="submenu">
-				<button class="back-button">Cancel</button>
+				<button class="cancel-button">Cancel</button>
 				<button class="save-button" style="width:70px; float:right;margin-left:5px;"><img src="img/save.png" /></button>
 				<button class="delete-button" style="width:70px; float:right;margin-left:5px;"><img src="img/delete2.png" /></button>
 				<button class="finish-button" style="width:70px; float:right;margin-left:5px;"><img src="img/finish.gif" /></button>
@@ -347,6 +351,7 @@
 	
 	// Uppstart
 	var current = {id:0, parent_id:0, title:"Alla"};
+	var view = "tree";
 	itemList.init("key");
 	if (itemList.itemArray==undefined) itemList.exampledata();
 	itemList.filtered("all");
@@ -356,19 +361,19 @@
 	// .subitem-left (visa edit-läge)
 	$(document).on('click', ".subitem-left", function() {
 		
-		var current_id = $(this).parent().find(".item_id").text();
-		current = itemList.get_item(current_id);
+		var id = $(this).parent().find(".item_id").text();
+		edit_item = itemList.get_item(id);
     
-		$(".menu-title").html("Edit: "+current.title);
+		$(".menu-title").html("Edit: "+edit_item.title);
 		
-     	$("input.item-id").val(current_id);
-     	$("input.item-title").val(current.title);
-     	$("textarea.item-notes").val(current.notes);
-		$(".item-prio").val(current.prio);
-     	$(".item-type").val(current.type);
-     	$(".item-size").val(current.size);
- 		$(".finish_date").val(current.finish_date);
-     	$("input.item-parent-id").val(current.parent_id);
+     	$("input.item-id").val(id);
+     	$("input.item-title").val(edit_item.title);
+     	$("textarea.item-notes").val(edit_item.notes);
+		$(".item-prio").val(edit_item.prio);
+     	$(".item-type").val(edit_item.type);
+     	$(".item-size").val(edit_item.size);
+ 		$(".finish_date").val(edit_item.finish_date);
+     	$("input.item-parent-id").val(edit_item.parent_id);
 		
 			/*$("input.item-category").val(current.category);
         $("input.item-create-date").val(current.date_create);
@@ -415,9 +420,9 @@
 	
 	// .save-button
 	$(document).on('click', ".save-button", function() {
-        itemList.edit_from_form("#edit-item-form");
-		view_item(current.parent_id);
-		
+      itemList.edit_from_form("#edit-item-form");
+		if(view=="tree")	view_item(current.id);
+		else view_filter();
     });
 	
 	
@@ -433,23 +438,28 @@
     });
 
 	// .cancel-button
-    $(document).on('click', ".cancel-button", function() {
-        view_item(current.id);
+   $(document).on('click', ".cancel-button", function() {
+     	if(view=="tree")	view_item(current.id);
+		else view_filter();
     });
 	
 	// .delete-button
-    $(document).on('click', ".delete-button", function() {
-		
-		if (confirm('Delete "'+current.title+'"?')==true) {
-            itemList.remove_item(current.id);
-			view_item(current.parent_id);
+   $(document).on('click', ".delete-button", function() {
+		id = $(".item-id").val();
+		if (confirm('Delete "'+itemList.get_item(id).title+'"?')==true) {
+      itemList.remove_item(id);
+		if(view=="tree")	view_item(current.id);
+		else view_filter();
 		}
     });
     
     // .finish-button
 	$(document).on('click', ".finish-button", function() {
-         itemList.finish_item(current.id);
-			view_item(current.parent_id);
+         id = $(".item-id").val();
+         itemList.edit_from_form("#edit-item-form");
+         itemList.finish_item(id);
+			if(view=="tree")	view_item(current.id);
+			else view_filter();
     });
 	
 
@@ -462,16 +472,20 @@
 	
 	// .search-button
 	$(document).on('click', ".search-button", function() {
-		$(".page").hide();
-		$("#search").show();
+		view_filter();
     });
 
+	// .tree-button
+	$(document).on('click', ".tree-button", function() {
+		view_item(current.id);
+    });
 	
 	function view_item (id) {
+		view = "tree";
 		current = itemList.get_item(id);
+		
 		itemList.refresh(id);
 		$(".menu-title").html(current.title);
-		$(".menu-path").html(itemList.get_path(current.id));
 		if(current.id == 0) $("#tree>.submenu>.back-button").hide(); 
 		else $("#tree>.submenu>.back-button").show();
 	
@@ -480,11 +494,20 @@
 	}
 	
 	//search
-    function search(query){
+    function view_filter(){
+        view = "filter";
+        
+        var query = $(".search").val();
+        var type = $(".type-filter").val();
+        
+        itemList.filtered(type); 
         $("#filtered>.subitem").show();
         if(query!="") $("#filtered>.subitem>.subitem-center>.title:not(:contains('"+query+"'))").parent().parent().hide();
         else $("#filtered>.subitem").show();
-    };
+        
+        $(".page").hide();
+		  $("#search").show();
+    }
     
 	
 </script>

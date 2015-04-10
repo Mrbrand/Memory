@@ -23,7 +23,7 @@ body {margin:0;  font-family:Verdana,Tahoma;background:#535069;}
 	 
     .submenu{background:#345;padding:5px; height:36px;}
     .search{border-radius:3px;width:150px;}
-	 .type-filter {border-radius:3px;width:150px;}
+	 .type-filter {border-radius:3px;width:45%;}
 	 
 
 button {

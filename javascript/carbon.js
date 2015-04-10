@@ -223,7 +223,8 @@ var itemList = {
 			var path = "/";
 			var item = this.get_item(id);
 			while(item.parent_id > 0){
-				item = this.get_item(item.parent_id);
+				if(this.get_item(item.parent_id)) item = this.get_item(item.parent_id);
+				else return "path broken"
 				path = "/" + item.title + path;
 			}
 			return path;
