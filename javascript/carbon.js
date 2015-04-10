@@ -81,6 +81,7 @@ var itemList = {
 		//sortera listan med avslutade 
 		if (finished_items.length != 0) tinysort("#finished>.subitem",{selector:'span.next_action',order:'desc'});
 		
+		//Om listan är tom
 		if (finished_items.length == 0 & open_items.length==0) $("#open").append("<div class='empty'>No items here</div>");
 		
 	},
@@ -92,16 +93,17 @@ var itemList = {
 
 		//filtrera itemArray
 		var filtered_items = this.get_type_items(type);
-		console.log(items);
+		
 		filtered_items.forEach(function(item) {
-			var template = $('#open_items_template').html();
+			if(itemList.get_path(item.id) !="/") item.path = itemList.get_path(item.id);
+			var template = $('#filtered_items_template').html();
 			var html = Mustache.to_html(template, item);
 			$("#filtered").append(html);
 		});
 		
 		//sortera listan med filtrerade 
 		if (filtered_items.length != 0) tinysort("#filtered>.subitem",{selector:'span.prio',order:'asc'}, {selector:'span.size',order:'asc'} );
-		
+		//Om listan är tom
 		else $("#filtered").append("<div class='empty'>No items here</div>");
 	},
 	
@@ -154,6 +156,8 @@ var itemList = {
 			temp2 = temp[i];
 			item[temp2["name"]] = temp2["value"];
 		}
+		//ta bort finish date om datum inte är satt
+		if (item['finish_date'] == "") delete item['finish_date'];
 		
 		//byta ut objekt i listan
 		this.remove_item(item.id);
@@ -175,7 +179,7 @@ var itemList = {
 	finish_item : function(id){
 		for(var i in this.itemArray){
 			if(this.itemArray[i].id==id){
-				this.itemArray[i]['finish_date'] = new Date().toLocaleString();
+				this.itemArray[i]['finish_date'] = moment().format().substring(0, 16);
 				break;
 				}
 		}
