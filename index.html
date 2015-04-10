@@ -245,7 +245,7 @@
 						
 		<div class="subitem-left quick_edit_item">
 			<img class="prio-icon" src="img/prio{{prio}}.png"/>
-			<img class="type-icon" style="margin:4px 3px;" src="img/type{{type}}.png"/>
+			<img class="type-icon" style="margin:4px 7px;" src="img/type{{type}}.png"/>
 			<img class="type-icon" style="margin:0;" src="img/size{{size}}.png"/>
 		</div>
 		
@@ -277,7 +277,7 @@
 						
 		<div class="subitem-left quick_edit_item">
 			<img class="prio-icon" src="img/prio{{prio}}.png"/>
-			<img class="type-icon" style="margin:4px 3px;" src="img/type{{type}}.png"/>
+			<img class="type-icon" style="margin:4px 7px;" src="img/type{{type}}.png"/>
 			<img class="type-icon" style="margin:0;" src="img/size{{size}}.png"/>
 		</div>
 		
@@ -419,7 +419,7 @@
 		current = itemList.get_item(id);
 		itemList.refresh(id);
 		$(".menu-title").html(current.title);
-		
+		$(".menu-path").html(itemList.get_path(current.id));
 		if(current.id == 0) $("#tree>.submenu>.back-button").hide(); 
 		else $("#tree>.submenu>.back-button").show();
 	

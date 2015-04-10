@@ -202,6 +202,7 @@ var itemList = {
 	},
 	
 	
+	
 	get_type_items : function(type){
 		
 		if (type!="all")
@@ -212,6 +213,17 @@ var itemList = {
 		else return this.itemArray.filter(function (item){
 			 	return item.id !=0;
 		});
-	}
+	},
+	
+	get_path : function(id){
+			var path = "/";
+			var item = this.get_item(id);
+			while(item.parent_id > 0){
+				item = this.get_item(item.parent_id);
+				path = "/" + item.title + path;
+			}
+			return path;
+	},
+	
 	
 }
