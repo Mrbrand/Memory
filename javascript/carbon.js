@@ -95,7 +95,6 @@ var itemList = {
 		var filtered_items = this.get_type_items(type);
 		
 		filtered_items.forEach(function(item) {
-			if(itemList.get_path(item.id) !="/") item.path = itemList.get_path(item.id);
 			var template = $('#filtered_items_template').html();
 			var html = Mustache.to_html(template, item);
 			$("#filtered").append(html);
@@ -143,8 +142,13 @@ var itemList = {
 		//lägga till id till objektet
 		item["id"] = itemList.get_last_id()+1;
 		
+		item["path"] = this.get_path(item["parent_id"])+this.get_item(item["parent_id"]).title+"/";
+
 		//lägga till objekt i listan
 		this.add_item(item);
+				
+		
+		
 	},
 	
 	
@@ -158,7 +162,7 @@ var itemList = {
 		}
 		//ta bort finish date om datum inte är satt
 		if (item['finish_date'] == "") delete item['finish_date'];
-		
+		item["path"] = this.get_path(item["parent_id"])+this.get_item(item["parent_id"]).title+"/";
 		//byta ut objekt i listan
 		this.remove_item(item.id);
 		this.add_item(item);
