@@ -91,8 +91,8 @@ var itemList = {
 		//rensa lista
 		$("#filtered").empty();
 
-		//filtrera itemArray
-		var filtered_items = this.get_type_items(type);
+		//filtrera itemArray	
+		var filtered_items = this.get_type_items(type, query);
 		
 		filtered_items.forEach(function(item) {
 			var template = $('#filtered_items_template').html();
@@ -146,9 +146,6 @@ var itemList = {
 
 		//lägga till objekt i listan
 		this.add_item(item);
-				
-		
-		
 	},
 	
 	
@@ -162,7 +159,7 @@ var itemList = {
 		}
 		//ta bort finish date om datum inte är satt
 		if (item['finish_date'] == "") delete item['finish_date'];
-		item["path"] = this.get_path(item["parent_id"])+this.get_item(item["parent_id"]).title+"/";
+		item["path"] = this.get_path(item["parent_id"]);
 		//byta ut objekt i listan
 		this.remove_item(item.id);
 		this.add_item(item);
@@ -209,27 +206,27 @@ var itemList = {
 		});
 	},
 	
-	
-	
-	get_type_items : function(type){
-		
+	get_type_items : function(type, query){
+		query = query.toLowerCase();
+		console.log(query);
 		if (type!="all")
 			return this.itemArray.filter(function (item){
-			 	return item.type == type & item.finish_date === undefined;
+			 	return item.type == type & item.title.toLowerCase().indexOf(query) !== -1;
+			 	
 			});
 		
 		else return this.itemArray.filter(function (item){
-			 	return item.id !=0;
+			 	return item.id !=0 & item.title.toLowerCase().indexOf(query) !== -1;
 		});
 	},
 	
 	get_path : function(id){
 			var path = "/";
-			var item = this.get_item(id);
-			while(item.parent_id > 0){
-				if(this.get_item(item.parent_id)) item = this.get_item(item.parent_id);
-				else return "path broken"
+			var item = this.get_item(id); 
+			while(item!==undefined){
+				//hämta parent om det finns
 				path = "/" + item.title + path;
+				item = this.get_item(item.parent_id);				
 			}
 			return path;
 	},

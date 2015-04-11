@@ -354,7 +354,7 @@
 	var view = "tree";
 	itemList.init("key");
 	if (itemList.itemArray==undefined) itemList.exampledata();
-	itemList.filtered("all");
+	itemList.filtered("all","");
 	view_item(0);
 	
 
@@ -500,10 +500,10 @@
         var query = $(".search").val();
         var type = $(".type-filter").val();
         
-        itemList.filtered(type); 
-        $("#filtered>.subitem").show();
-        if(query!="") $("#filtered>.subitem>.subitem-center>.title:not(:contains('"+query+"'))").parent().parent().hide();
-        else $("#filtered>.subitem").show();
+        itemList.filtered(type, query); 
+        //$("#filtered>.subitem").show();
+        //if(query!="") $("#filtered>.subitem>.subitem-center>.title:not(:contains('"+query+"'))").parent().parent().hide();
+        //else $("#filtered>.subitem").show();
         
         $(".page").hide();
 		  $("#search").show();
