@@ -26,7 +26,7 @@ body {margin:0;  font-family:Verdana,Tahoma;background:#535069;}
 	 .type-filter {border-radius:3px;width:45%;}
 	 
 
-button {
+button{
 	-moz-box-shadow:inset 0px 1px 0px 0px #e3e3e3;
 	-webkit-box-shadow:inset 0px 1px 0px 0px #e3e3e3;
 	box-shadow:inset 0px 1px 0px 0px #e3e3e3;
@@ -105,7 +105,8 @@ button:active {
  
 .next_action {font-size:10px;  color: #399;  height: 12px; overflow: hidden;}  
 .task_notes {font-size: 8pt;  color: #999;  height: 15px; overflow: hidden;}  
-
+.finish_date{ font-size:10px;  color: #974;  height: 12px; overflow: hidden;font-weight:bold;}  
+	 
 .subitem .category {font-size:7px; display:block;margin-left: 3px;}
 .subitem .status {font-size:8px; display:block;margin-left: 5px;}
 .subitem .prio {font-size:8px; display:block;}
