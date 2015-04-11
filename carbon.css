@@ -9,10 +9,10 @@
 
 
 .finished{
-	background: -webkit-linear-gradient(#889, #667);
+	background: -webkit-linear-gradient(#99A, #778);
 }
 
-.finished>.subitem-center>.title{color:darkgrey;}
+.finished>.subitem-center>.title{color:#CCC;}
 .finished>.subitem-left>img{opacity: 0.4;}
 /* CSS - Cascading Style Sheet */
 /* Palette color codes */

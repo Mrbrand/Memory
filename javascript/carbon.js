@@ -183,7 +183,7 @@ var itemList = {
 	finish_item : function(id){
 		for(var i in this.itemArray){
 			if(this.itemArray[i].id==id){
-				this.itemArray[i]['finish_date'] = moment().format().substring(0, 16);
+				this.itemArray[i]['finish_date'] = moment().format('YYYY-MM-DD HH:mm:ss');
 				break;
 				}
 		}
