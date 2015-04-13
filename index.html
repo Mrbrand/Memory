@@ -185,8 +185,8 @@
 			
 			
 			<form id="new-item-form">
-				<textarea  id="new-item-title" name="title" placeholder="Title" rows="1"></textarea><br/>
-			
+				<textarea  id="new-item-title" name="title" placeholder="Title" rows="1" style="margin-bottom:5px;height:50px; font-size:1.3em"></textarea><br/>
+				
 				<select id="new-item-prio" name="prio" style="margin-bottom:5px;height:40px;">
 					<option value="1">Prio 1</option> 
 					<option value="2">Prio 2</option> 
@@ -436,6 +436,10 @@
     $(document).on('click', ".back-button", function() {
 		view_item(current.parent_id);
     });
+
+	$("#tree").on("swiperight",function(){
+	   view_item(current.parent_id);
+	});
 
 	// .cancel-button
    $(document).on('click', ".cancel-button", function() {
