@@ -13,6 +13,7 @@
 }
 
 .finished>.subitem-center>.title{color:#CCC;}
+.finished>.subitem-center>.notes{color:white;}
 .finished>.subitem-left>img{opacity: 0.4;}
 /* CSS - Cascading Style Sheet */
 /* Palette color codes */
