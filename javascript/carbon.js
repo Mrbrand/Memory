@@ -79,7 +79,7 @@ var itemList = {
 			$("#finished").append(html);
 		});
 		//sortera listan med avslutade 
-		if (finished_items.length != 0) tinysort("#finished>.subitem",{selector:'span.next_action',order:'desc'});
+		if (finished_items.length != 0) tinysort("#finished>.subitem",{selector:'span.finish_date',order:'desc'});
 		
 		//Om listan är tom
 		if (finished_items.length == 0 & open_items.length==0) $("#open").append("<div class='empty'>No items here</div>");
@@ -211,12 +211,12 @@ var itemList = {
 		console.log(query);
 		if (type!="all")
 			return this.itemArray.filter(function (item){
-			 	return item.type == type & item.title.toLowerCase().indexOf(query) !== -1;
+			 	return item.type == type & item.title.toLowerCase().indexOf(query) !== -1 & item.finish_date === undefined;
 			 	
 			});
 		
 		else return this.itemArray.filter(function (item){
-			 	return item.id !=0 & item.title.toLowerCase().indexOf(query) !== -1;
+			 	return item.id !=0 & item.title.toLowerCase().indexOf(query) !== -1 & item.finish_date === undefined;
 		});
 	},
 	

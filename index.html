@@ -17,6 +17,7 @@
 		<script language="JavaScript" type="text/javascript" src="javascript/mustache.js"></script>	
 		<script language="JavaScript" type="text/javascript" src="javascript/carbon.js"></script>
 		<script language="JavaScript" type="text/javascript" src="javascript/jquery-2.1.3.min.js"></script> 
+		<script language="JavaScript" type="text/javascript" src="javascript/jquery.detect_swipe.js"></script> 
 		<script language="JavaScript" type="text/javascript" src="javascript/tinysort.js"></script>
 		
 	</head>
@@ -437,10 +438,13 @@
 		view_item(current.parent_id);
     });
 
-	$("#tree").on("swiperight",function(){
-	   view_item(current.parent_id);
+	//swipe back
+	$("#tree").on('swiperight',  function(){ 
+		if(current.parent_id!=-1)
+			view_item(current.parent_id);
 	});
 
+	
 	// .cancel-button
    $(document).on('click', ".cancel-button", function() {
      	if(view=="tree")	view_item(current.id);
