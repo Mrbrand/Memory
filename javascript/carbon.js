@@ -142,7 +142,7 @@ var itemList = {
 		//lägga till id till objektet
 		item["id"] = itemList.get_last_id()+1;
 		
-		item["path"] = this.get_path(item["parent_id"])+this.get_item(item["parent_id"]).title+"/";
+		item["path"] = this.get_path(item["parent_id"]);
 
 		//lägga till objekt i listan
 		this.add_item(item);
@@ -219,6 +219,26 @@ var itemList = {
 			 	return item.id !=0 & item.title.toLowerCase().indexOf(query) !== -1 & item.finish_date === undefined;
 		});
 	},
+	
+	
+	
+	query : function(field, operator, value){
+		
+		if (operator=="contains"){
+			value = value.toLowerCase();
+			return this.itemArray.filter(function (item){
+			 	return item[field].toLowerCase().indexOf(value) !== -1; 	
+			});
+		}
+		
+		else if(operator == "is") {
+			return this.itemArray.filter(function (item){
+				 	return item[field] == value;
+			});
+		}
+		
+	},
+	
 	
 	get_path : function(id){
 			var path = "/";
