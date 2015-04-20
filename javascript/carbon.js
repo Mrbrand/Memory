@@ -38,7 +38,7 @@ var itemList = {
 	
 	cleardata : function() {   
 		this.itemArray = [];
-		localStorage.removeItem('key');
+		localStorage.removeItem('memory');
 		this.add_item({id:0, parent_id:-1, title:"", prio:1, size:0});
 	},
 	
@@ -123,7 +123,7 @@ var itemList = {
 
 	add_item : function(item){
 		this.itemArray.push(item);
-		window.localStorage.setItem("key", JSON.stringify(this.itemArray));
+		window.localStorage.setItem("memory", JSON.stringify(this.itemArray));
 	},
 	
 
@@ -173,7 +173,7 @@ var itemList = {
 				break;
 				}
 		}
-		window.localStorage.setItem("key", JSON.stringify(this.itemArray));
+		window.localStorage.setItem("memory", JSON.stringify(this.itemArray));
 	},
 	
 	
@@ -184,7 +184,7 @@ var itemList = {
 				break;
 				}
 		}
-		window.localStorage.setItem("key", JSON.stringify(this.itemArray));
+		window.localStorage.setItem("memory", JSON.stringify(this.itemArray));
 	},
 	
 	
