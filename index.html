@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>Wiseguy</title> 
+		<title>Memory</title> 
 		
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<meta content="minimum-scale=1.0, width=device-width, maximum-scale=0.6667, user-scalable=no" name="viewport" />
@@ -110,51 +110,37 @@
 				<button class="cancel-button">Cancel</button>
 				<button class="save-button" style="width:70px; float:right;margin-left:5px;"><img src="img/save.png" /></button>
 				<button class="delete-button" style="width:70px; float:right;margin-left:5px;"><img src="img/delete2.png" /></button>
-				<button class="finish-button" style="width:70px; float:right;margin-left:5px;"><img src="img/finish.gif" /></button>
 				<br/><br/>
 			</div><!-- end controls--> 
 			
 			<form id="edit-item-form">
 				<input class="item-title" name="title" type="text" style="margin-bottom:5px;height:50px; font-size:1.3em"/><br/>
+
+			  	<input class="year" name="year" type="text" style="width:40px;margin-bottom:5px;float:left;"/>
+			  	<input class="month" name="month" type="text" style="width:40px;margin-bottom:5px;float:left;"/>
+			  	<input class="day" name="day" type="text" style="width:40px;margin-bottom:5px;float:left;"/>
 				
-				<select class="item-prio" name="prio" style="margin-bottom:5px;height:40px;">
-					<option value="1">Prio 1</option>
-					<option value="2">Prio 2</option>
-					<option value="3">Prio 3</option>
-					<option value="4">Prio 4</option>
-					<option value="5">Prio 5</option>
+		     <select class="category" name="category" style="margin-bottom:5px;height:40px;">
+		         <option value="">--Kategori--</option>
+		         <option value="Boende">Boende</option>
+		         <option value="Jobb/ Studier">Jobb/ Studier</option>
+		         <option value="Familj">Familj</option>
+		         <option value="Hälsa">Hälsa</option>
+		         <option value="Webb">Webb</option>
+		         <option value="Nöje">Nöje</option>
+		     </select><br/>
+				
+				<select class="importance" name="importance" style="margin-bottom:5px;height:40px;">
+					<option value="">--Set importance--</option>
+		         <option value="1">1-Milstolpe</option>
+		         <option value="2">2-Event</option>
+		         <option value="3">3-Händelse</option>
+		         <option value="4">4-Företeelse</option>
+		         <option value="5">5-Anteckning</option>
 				</select><br/>
 				
-				<select class="item-type" name="type" style="margin-bottom:5px;height:40px;">
-					<option value="6">-General Task</option>
-                    <option value="14">-Home</option>
-        			<option value="9">-Telephone</option>
-					<option value="10">-Computer</option>
-                    <option value="11">-Away</option>
-                    <option value="12">-Planning</option>
-					<option value="4">-Idea</option>
-                    <option value="5">-Problem</option>
-					<option value="7">-Project</option> 
-					<option value="13">-Category</option> 
-					<option value="100">-Document</option>  
-					<option disabled>Programming:</option>
-					<option value="1">-Coding</option>  
-					<option value="2">-Sketch</option>
-					<option value="3">-Solve</option>
-					<option value="8">-Page</option>  
-				</select><br/>
-				
-				<select class="item-size" name="size" style="margin-bottom:5px;height:40px;">
-					<option value="6">--Set size--</option>
-					<option value="1">Quick (5min)</option>
-					<option value="2">Small (<15min)</option>
-					<option value="3">Medium (<1h)</option>
-					<option value="4">Large (<3h)</option>
-					<option value="5">XLarge (>3h)</option>
-				</select><br/>
-				
-				<textarea class="item-notes" name="notes" rows="5" placeholder="Notes"></textarea>
-				
+				<textarea class="item-notes" name="notes" rows="7" placeholder="Notes"></textarea>
+			
 				<center>
 					<button class="more-button" type='button'>More options</button>
 				</center>
@@ -245,7 +231,14 @@
 				<div class="menu-title">MENU</div>
 				<img class="cancel-button" src="img/menu-button.png"  style="float:right; margin:5px;"/>
 			</div> <end header-->
-			<button onclick="window.open('mailto:test@example.com?subject=WiseGuy backup&body='+JSON.stringify(itemList.itemArray));">Mail backup</button>
+			<!--button onclick="window.open('mailto:test@example.com?subject=WiseGuy backup&body='+JSON.stringify(itemList.itemArray));">Mail backup</button-->
+			
+			<textarea class="json-input" rows="5" placeholder="JSON"></textarea>
+			<button onclick="myString = $('.json-input').val().replace('/[\r\n]/g', '<br />'); itemList.itemArray = JSON.parse(myString);">Till local</button><br/><br/>
+			
+			<input class="json-output" type="text" />
+			
+			
 			<!--span style="color:white;">These functions are experimental, use with caution!</span> <br/>
 			<button onclick="if (confirm('Previous data will be erased!')==true) {itemList.cleardata(); view_item(0);}" style="margin:10px;">Clear data</button><br/>
 			<button onclick="if (confirm('Previous data will be erased!')==true) {itemList.testdata(); itemList.refresh(0);view_item(0);}" style="margin:10px;">Test data (50000 randomized items)</button><br/>
@@ -261,59 +254,31 @@
 	<div class="subitem project">
 						
 		<div class="subitem-left quick_edit_item">
-			<img class="prio-icon" src="img/prio{{prio}}.png"/>
-			<img class="type-icon" style="margin:4px 7px;" src="img/type{{type}}.png"/>
-			<img class="type-icon" style="margin:0;" src="img/size{{size}}.png"/>
+			<img class="prio-icon" src="img/prio5.png"/>
+			<!img class="type-icon" style="margin:4px 7px;" src="img/type{{type}}.png"/>
+			<div class="category" style="">{{category}}</div>
+			<img class="type-icon" style="margin:0;" src="img/size{{importance}}.png"/>
 		</div>
 		
 		<div class="subitem-center">
 			<div class="title" style="">{{title}}</div>
 			<div class="next_action_div" style="float:left;">
+			<span class="date">{{year}}-{{month}}-{{day}}</span><br/>
 				{{#notes}}<span class="notes">{{notes}}</span>{{/notes}}
-				{{#subitems}}
-					<img style="margin:4px 0px 4px 5px;height:10px;vertical-align: text-top;" src="img/type{{type}}.png"/>
-					<span class="next_action">{{title}}</span><br/>  
-				{{/subitems}}
 			</div>
 		</div><!-- end subitem-center -->
 		 
 		<div style="clear:both;"></div>
 		
 		<span class="item_id" style="display:none;">{{id}}</span>
-		<span class="prio" style="display:none;">{{prio}}</span>
-		<span class="type" style="display:none;">{{type}}</span>
-		<span class="size" style="display:none;">{{size}}</span>
-	
-	</div><!-- end subitem  -->
-</script>	
-	
-	
-<!-- Mustache template avslutade -->
-<script id="finished_items_template" type="text/template">
-	<div class="subitem finished project">
-						
-		<div class="subitem-left quick_edit_item">
-			<img class="prio-icon" src="img/prio{{prio}}.png"/>
-			<img class="type-icon" style="margin:4px 7px;" src="img/type{{type}}.png"/>
-			<img class="type-icon" style="margin:0;" src="img/size{{size}}.png"/>
-		</div>
+		<span class="importance" style="display:none;">{{importance}}</span>
 		
-		<div class="subitem-center">
-			<div class="title" style="">{{title}}</div>
-			<div class="next_action_div" style="float:left;">
-				<span class="finish_date">{{finish_date}}</span>
-				{{#notes}}<span class="notes">{{notes}}</span>{{/notes}}
-				
-			</div>
-		</div><!-- end subitem-center -->
-		 
-		<div style="clear:both;"></div>
+		<span class="year" style="display:none;">{{year}}</span>
+		<span class="month" style="display:none;">{{month}}</span>
+		<span class="day" style="display:none;">{{day}}</span>
 		
-		<span class="item_id" style="display:none;">{{id}}</span>
-		<span class="prio" style="display:none;">{{prio}}</span>
-		<span class="type" style="display:none;">{{type}}</span>
-	
-	</div><!-- end subitem  -->
+		
+	</div>
 </script>	
 	
 	
@@ -372,10 +337,10 @@
      	$("input.item-id").val(id);
      	$("input.item-title").val(edit_item.title);
      	$("textarea.item-notes").val(edit_item.notes);
-		$(".item-prio").val(edit_item.prio);
-     	$(".item-type").val(edit_item.type);
-     	$(".item-size").val(edit_item.size);
- 		$(".finish_date").val(edit_item.finish_date);
+		$(".year").val(edit_item.year);
+     	$(".month").val(edit_item.month);
+     	$(".day").val(edit_item.day);
+ 		$(".importance").val(edit_item.importance);
      	$("input.item-parent-id").val(edit_item.parent_id);
 		
 			/*$("input.item-category").val(current.category);
@@ -450,6 +415,7 @@
 	$("#tree").on('swipeleft',  function(){ 
 		if(Date.now()  - latest_swipe <200){
 			alert("2 left swipes -> Backdoor menu");
+			$(".json-output").val(JSON.stringify(window.localStorage.getItem("memory")));
 			$(".page").hide();
 			$("#menu").show();
 		}
