@@ -36,7 +36,7 @@ var itemList = {
 	cleardata : function() {   
 		this.itemArray = [];
 		localStorage.removeItem('memory');
-		this.add_item({id:0, parent_id:-1, title:"", prio:1, size:0});
+		this.add_item({id:3, title:"Some memories", category:"Nöje", importance:3, notes: "Tjolahopp"});
 	},
 	
 	
