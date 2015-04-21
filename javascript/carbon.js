@@ -61,15 +61,14 @@ var itemList = {
 		
 		//Fylla #open med 
 		open_items.forEach(function(item) {
-			item.subitems = itemList.get_prio1_subitems(item.id,1);
-			item.subitems.sort(function(a, b){return a.type-b.type});
+			
 			var template = $('#open_items_template').html();
 			var html = Mustache.to_html(template, item);
 			$("#open").append(html);
 		});
 		//sortera listan med öppna  
-		if (open_items.length != 0) tinysort("#open>.subitem",{selector:'span.year',order:'desc'}, {selector:'span.month',order:'desc'}, {selector:'span.day',order:'desc'});
-		else $("#filtered").append("<div class='empty'>No items here</div>");
+		/*if (open_items.length != 0) tinysort("#open>.subitem",{selector:'span.year',order:'desc'}, {selector:'span.month',order:'desc'}, {selector:'span.day',order:'desc'});
+		else $("#filtered").append("<div class='empty'>No items here</div>");*/
 	},
 	
 	
@@ -81,15 +80,18 @@ var itemList = {
 		var filtered_items = this.get_type_items(type, query);
 		
 		filtered_items.forEach(function(item) {
+			var monthNames = [ "?", "Jan", "Feb", "Mar", "Apr", "Maj", "Jun", "Jul", "Aug", "Sep", "Okt", "Nov", "Dec" ];
+			item.month_name = monthNames[item.month];
 			var template = $('#filtered_items_template').html();
 			var html = Mustache.to_html(template, item);
 			$("#filtered").append(html);
 		});
 		
 		//sortera listan med filtrerade 
-		if (filtered_items.length != 0) tinysort("#filtered>.subitem",{selector:'span.prio',order:'asc'}, {selector:'span.size',order:'asc'} );
-		//Om listan är tom
+		//tinysort("#filtered>.subitem",{selector:'span.year',order:'desc'}, {selector:'span.month',order:'desc'}, {selector:'span.day',order:'desc'});
+		if (filtered_items.length != 0) tinysort("#filtered>.subitem",{selector:'span.year',order:'desc'}, {selector:'span.month',order:'desc'}, {selector:'span.day',order:'desc'});
 		else $("#filtered").append("<div class='empty'>No items here</div>");
+		
 	},
 	
 	
@@ -194,15 +196,15 @@ var itemList = {
 	
 	get_type_items : function(type, query){
 		query = query.toLowerCase();
-		console.log(query);
+		//console.log(query);
 		if (type!="all")
 			return this.itemArray.filter(function (item){
-			 	return item.type == type & item.title.toLowerCase().indexOf(query) !== -1 & item.finish_date === undefined;
+			 	return item.category == type & item.title.toLowerCase().indexOf(query) !== -1;
 			 	
 			});
 		
 		else return this.itemArray.filter(function (item){
-			 	return item.id !=0 & item.title.toLowerCase().indexOf(query) !== -1 & item.finish_date === undefined;
+			 	return item.id !=0 & item.title.toLowerCase().indexOf(query) !== -1;
 		});
 	},
 	

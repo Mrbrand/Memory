@@ -56,7 +56,7 @@
 			  
 			<div id="header">
 				<div style="float:left;">Search</div>
-				<img class="tree-button" src="img/tree-icon.png"  style="float:right; margin:5px; cursor:pointer;"/>
+				<button class="new-button">New</button>
 			</div> <!--end header-->
 			
 			<!--Sub-meny-->
@@ -68,22 +68,12 @@
 				<!--Select type-->
 				<select class="type-filter" onchange="view_filter();">
 					<option value="all">-ALL-</option>
-					<option value="6">-General Task</option>
-               <option value="14">-Home</option>
-        			<option value="9">-Telephone</option>
-					<option value="10">-Computer</option>
-               <option value="11">-Away</option>
-               <option value="12">-Planning</option>
-					<option value="4">-Idea</option>
-               <option value="5">-Problem</option>
-					<option value="7">-Project</option> 
-					<option value="13">-Category</option> 
-					<option value="100">-Document</option>  
-					<option disabled>Programming:</option>
-					<option value="1">-Coding</option>  
-					<option value="2">-Sketch</option>
-					<option value="3">-Solve</option>
-					<option value="8">-Page</option>  
+		         <option value="Boende">Boende</option>
+		         <option value="Jobb/ Studier">Jobb/ Studier</option>
+		         <option value="Familj">Familj</option>
+		         <option value="Hälsa">Hälsa</option>
+		         <option value="Webb">Webb</option>
+		         <option value="Nöje">Nöje</option>
 				</select>
 				
 				
@@ -131,12 +121,12 @@
 		     </select><br/>
 				
 				<select class="importance" name="importance" style="margin-bottom:5px;height:40px;">
-					<option value="">--Set importance--</option>
-		         <option value="1">1-Milstolpe</option>
-		         <option value="2">2-Event</option>
+					<option value="0">--Set importance--</option>
+		         <option value="5">5-Milstolpe</option>
+		         <option value="4">4-Event</option>
 		         <option value="3">3-Händelse</option>
-		         <option value="4">4-Företeelse</option>
-		         <option value="5">5-Anteckning</option>
+		         <option value="2">2-Företeelse</option>
+		         <option value="1">1-Anteckning</option>
 				</select><br/>
 				
 				<textarea class="item-notes" name="notes" rows="7" placeholder="Notes"></textarea>
@@ -147,10 +137,6 @@
 				<div class="more" style="display:none;">
 					<span class="field-description">id:</span>
 					<input class="item-id" name="id" type="text" readonly="readonly" style="color:#CCC;"/> <br/>
-					<span class="field-description">parent_id:</span>
-					<input class="item-parent-id" name="parent_id" type="text" style="margin-bottom:5px;"/><br/>
-					<span class="field-description">Finish date</span>
-					<input class="finish_date" name="finish_date" type="text" style="margin-bottom:5px;height:40px; font-size:1.1em"/><br/>
 				</div>
 				
 			</form>
@@ -174,46 +160,31 @@
 			<form id="new-item-form">
 				<textarea  id="new-item-title" name="title" placeholder="Title" rows="1" style="margin-bottom:5px;height:50px; font-size:1.3em; padding-top: 11px;"></textarea><br/>
 				
-				<select id="new-item-prio" name="prio" style="margin-bottom:5px;height:40px;">
-					<option value="1">Prio 1</option> 
-					<option value="2">Prio 2</option> 
-					<option value="3" selected="selected">Prio 3</option> 
-					<option value="4">Prio 4</option> 
-					<option value="5">Prio 5</option>
+			  	<input class="year" name="year" type="text" style="width:40px;margin-bottom:5px;float:left;"/>
+			  	<input class="month" name="month" type="text" style="width:40px;margin-bottom:5px;float:left;"/>
+			  	<input class="day" name="day" type="text" style="width:40px;margin-bottom:5px;float:left;"/>
+				
+		     <select class="category" name="category" style="margin-bottom:5px;height:40px;">
+		         <option value="">--Kategori--</option>
+		         <option value="Boende">Boende</option>
+		         <option value="Jobb/ Studier">Jobb/ Studier</option>
+		         <option value="Familj">Familj</option>
+		         <option value="Hälsa">Hälsa</option>
+		         <option value="Webb">Webb</option>
+		         <option value="Nöje">Nöje</option>
+		     </select><br/>
+				
+				<select class="importance" name="importance" style="margin-bottom:5px;height:40px;">
+					<option value="0">--Set importance--</option>
+		         <option value="5">5-Milstolpe</option>
+		         <option value="4">4-Event</option>
+		         <option value="3">3-Händelse</option>
+		         <option value="2">2-Företeelse</option>
+		         <option value="1">1-Anteckning</option>
 				</select><br/>
 				
-				<select id="new-item-type" name="type" style="margin-bottom:5px;height:40px;">
-					<option value="6">-General Task</option>
-                    <option value="14">-Home</option>
-        			<option value="9">-Telephone</option>
-					<option value="10">-Computer</option>
-                    <option value="11">-Away</option>
-                    <option value="12">-Planning</option>
-					<option value="4">-Idea</option>
-                    <option value="5">-Problem</option>
-					<option value="7">-Project</option> 
-					<option value="13">-Category</option> 
-					<option value="100">-Document</option>  
-					<option disabled>Programming:</option>
-					<option value="1">-Coding</option>  
-					<option value="2">-Sketch</option>
-					<option value="3">-Solve</option>
-					<option value="8">-Page</option>  
-				</select>
-				
-				 <select id="new-item-size" name="size" style="margin-bottom:5px;height:40px;">
-					<option value="6" selected>--Set size--</option>
-					<option value="1">Quick (5min)</option>
-					<option value="2">Small (<15min)</option>
-					<option value="3">Medium (<1h)</option>
-					<option value="4">Large (<3h)</option>
-					<option value="5">XLarge (>3h)</option>
-				</select><br/>
-				
-				<textarea id="new-item-notes" name="notes" placeholder="Notes" rows="5"></textarea>
-				
-				<input type="hidden" name="parent_id" id="new-parent-id" value="0"/>
-				<input type="hidden" name="status" value="open" placeholder="Status" style="margin-bottom:5px;"/>
+				<textarea class="item-notes" name="notes" rows="7" placeholder="Notes"></textarea>
+			
 				
 			</form>
 			<br/><br/><br/><br/><br/><br/><br/>
@@ -250,7 +221,7 @@
 
 
 <!-- Mustache template öppna-->
-<script id="open_items_template" type="text/template">
+<!--script id="open_items_template" type="text/template">
 	<div class="subitem project">
 						
 		<div class="subitem-left quick_edit_item">
@@ -264,6 +235,39 @@
 			<div class="title" style="">{{title}}</div>
 			<div class="next_action_div" style="float:left;">
 			<span class="date">{{year}}-{{month}}-{{day}}</span><br/>
+				{{#notes}}<span class="notes">{{notes}}</span>{{/notes}}
+			</div>
+		</div><!-- end subitem-center -->
+		 
+		<!--div style="clear:both;"></div>
+		
+		<span class="item_id" style="display:none;">{{id}}</span>
+		<span class="importance" style="display:none;">{{importance}}</span>
+		
+		<span class="year" style="display:none;">{{year}}</span>
+		<span class="month" style="display:none;">{{month}}</span>
+		<span class="day" style="display:none;">{{day}}</span>
+		
+		
+	</div>
+</script>	
+	
+	
+<!-- Mustache template search -->
+<script id="filtered_items_template" type="text/template">
+	<div class="subitem project">
+						
+		<div class="subitem-left quick_edit_item">
+			<img class="prio-icon" src="img/prio5.png"/>
+			<!img class="type-icon" style="margin:4px 7px;" src="img/type{{type}}.png"/>
+			<div class="category" style="">{{category}}</div>
+			<img class="type-icon" style="margin:0;" src="img/size{{importance}}.png"/>
+		</div>
+		
+		<div class="subitem-center">
+			<div class="title" style="">{{title}}</div>
+			<div class="next_action_div" style="float:left;">
+			<span class="date">{{day}} {{month_name}} {{year}}</span><br/>
 				{{#notes}}<span class="notes">{{notes}}</span>{{/notes}}
 			</div>
 		</div><!-- end subitem-center -->
@@ -282,49 +286,18 @@
 </script>	
 	
 	
-<!-- Mustache template search -->
-<script id="filtered_items_template" type="text/template">
-	<div class="subitem project{{#finish_date}} finished{{/finish_date}}">
-						
-		<div class="subitem-left quick_edit_item">
-			<img class="prio-icon" src="img/prio{{prio}}.png"/>
-			<img class="type-icon" style="margin:4px 7px;" src="img/type{{type}}.png"/>
-			<img class="type-icon" style="margin:0;" src="img/size{{size}}.png"/>
-		</div>
-		
-		<div class="subitem-center">
-			<div class="title" style="">{{title}}</div>
-			{{#path}}<div class="path" style="">{{path}}</div>{{/path}}
-			<div class="next_action_div" style="float:left;">
-				<span class="finish_date">{{finish_date}}</span>
-				{{#notes}}<span class="notes">{{notes}}</span>{{/notes}}
-				
-			</div>
-		</div><!-- end subitem-center -->
-		 
-		<div style="clear:both;"></div>
-		
-		<span class="item_id" style="display:none;">{{id}}</span>
-		<span class="prio" style="display:none;">{{prio}}</span>
-		<span class="type" style="display:none;">{{type}}</span>
-		<span class="size" style="display:none;">{{size}}</span>
-	
-	</div><!-- end subitem  -->
-</script>	
-	
-	
 <!-- Navigerings script -->	
 <script>
 	
 	// Uppstart
-	var current = {id:0, parent_id:0, title:"Alla"};
-	var view = "tree";
+	//var current = {id:0, parent_id:0, title:"Alla"};
+	var view = "search";
 	var latest_swipe;
 	itemList.init("memory");
 	if (itemList.itemArray==undefined) itemList.exampledata();
 	itemList.filtered("all","");
-	view_item(0);
-	
+	view_filter();
+                
 
 	// .subitem-left (visa edit-läge)
 	$(document).on('click', ".subitem-left", function() {
@@ -341,7 +314,6 @@
      	$(".month").val(edit_item.month);
      	$(".day").val(edit_item.day);
  		$(".importance").val(edit_item.importance);
-     	$("input.item-parent-id").val(edit_item.parent_id);
 		
 			/*$("input.item-category").val(current.category);
         $("input.item-create-date").val(current.date_create);
@@ -365,24 +337,27 @@
     
 	// .new-button
 	$(document).on('click', ".new-button", function() {
- 
-		$(".menu-title").html("New: "+current.title);
-      $("input.item-id").val(current.id);
+ 		var today = new Date();
+ 		var day = today.getDate();
+      var month = today.getMonth()+1; //January is 0!
+      var year = today.getFullYear();
+      $(".year").val(year);
+      $(".month").val(month);
+      $(".day").val(day);
+        
+		$(".menu-title").html("New: ");
       $("#new-item-title").val("");
-      $("#new-item-prio").val("2");
-      //$("#new-item-type").val("6");   // visar senaste om bortkommenterad
       $("#new-item-notes").val("");
-      $("#new-item-size").val("6");
-      $("#new-parent-id").val(current.id);
-		
+      $(".importance").val("0");
+  	
 		$(".page").hide();
 		$("#new").show();
     });
 	
 	// .add-button
 	$(document).on('click', ".add-button", function() {
-        itemList.add_from_form("#new-item-form");
-		view_item(current.id);
+      itemList.add_from_form("#new-item-form");
+		view_filter();
     });
 	
 	
