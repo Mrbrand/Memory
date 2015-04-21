@@ -1,16 +1,12 @@
-#header{background:#446;}
-.submenu{background:#335;}
+#header{background:#3E360A;}
+.submenu{background:#220;}
 .project{ 
-    background: -webkit-linear-gradient(#667, #445);
+    background: -webkit-linear-gradient(#746A38, #3E360A);
     color: #DDA;
 }
-.notes{color:#88A;}
-.next_action{color: #A96;}
+.notes{color:#A99E62;}
+.next_action{color: #A99E62;}
 
-
-.finished{
-	background: -webkit-linear-gradient(#99A, #778);
-}
 
 .finished>.subitem-center>.title{color:#CCC;}
 .finished>.subitem-center>.next_action_div>.notes{color:#CCC;}

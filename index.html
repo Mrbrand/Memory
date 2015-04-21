@@ -183,7 +183,7 @@
 		         <option value="1">1-Anteckning</option>
 				</select><br/>
 				
-				<textarea class="item-notes" name="notes" rows="7" placeholder="Notes"></textarea>
+				<textarea class="new-item-notes" name="notes" rows="7" placeholder="Notes"></textarea>
 			
 				
 			</form>
@@ -350,7 +350,10 @@
 		$(".menu-title").html("New: ");
       $("#new-item-title").val("");
       $("#new-item-notes").val("");
+      $(".category").val("");
       $(".importance").val("0");
+      
+      
   	
 		$(".page").hide();
 		$("#new").show();
