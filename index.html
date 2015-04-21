@@ -300,9 +300,9 @@
                 
 
 	// .subitem-left (visa edit-läge)
-	$(document).on('click', ".subitem-left", function() {
+	$(document).on('click', ".subitem", function() {
 		
-		var id = $(this).parent().find(".item_id").text();
+		var id = $(this).find(".item_id").text();
 		edit_item = itemList.get_item(id);
     
 		$(".menu-title").html("Edit: "+edit_item.title);
@@ -328,10 +328,10 @@
     
 	
 	// .subitem-center (visa subitems)
-	$(document).on('click', ".subitem-center", function() {
+	/*$(document).on('click', ".subitem-center", function() {
 		var current_id = $(this).parent().find(".item_id").text();
 		view_item (current_id);
-    });
+    });*/
     
     
     
