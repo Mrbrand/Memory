@@ -204,12 +204,12 @@
 			</div> <end header-->
 			<!--button onclick="window.open('mailto:test@example.com?subject=WiseGuy backup&body='+JSON.stringify(itemList.itemArray));">Mail backup</button-->
 			
-			<textarea class="json-input" rows="5" placeholder="JSON"></textarea>
-			<button onclick="myString = $('.json-input').val().replace('/[\r\n]/g', '<br />'); itemList.itemArray = JSON.parse(myString);">Till local</button><br/><br/>
+			<!--textarea class="json-input" rows="5" placeholder="JSON"></textarea>
+			<button onclick="myString = $('.json-input').val().replace('/[\r\n]/g', '<br />'); itemList.itemArray = JSON.parse(myString);">Till local</button><br/-->
+			<br/><br/>
+			<button onclick="itemList.cleardata();">Reset data</button><br/><br/>
 			
-			<button onclick="itemList.cleardata();">Till local</button><br/><br/>
-			
-			<input class="json-output" type="text" />
+			<!input class="json-output" type="text" />
 			
 			
 			<!--span style="color:white;">These functions are experimental, use with caution!</span> <br/>
