@@ -29,14 +29,14 @@ var itemList = {
 	
 	exampledata : function() {   
 		this.itemArray = [];
-		this.add_item({id:3, title:"Some memories", category:"Nöje", importance:3, notes: "Tjolahopp"});
+		this.add_item({id:100000, title:"Some memories", category:"Nöje", importance:3, notes: "Tjolahopp"});
 		
 	},
 	
 	cleardata : function() {   
 		this.itemArray = [];
 		localStorage.removeItem('memory');
-		this.add_item({id:0, parent_id:-1, title:"", prio:1, size:0});
+		this.add_item({id:100000, title:"Some memories", category:"Nöje", importance:3, notes: "Tjolahopp"});
 	},
 	
 	
@@ -86,7 +86,7 @@ var itemList = {
 		
 		//sortera listan med filtrerade 
 		//tinysort("#filtered>.subitem",{selector:'span.year',order:'desc'}, {selector:'span.month',order:'desc'}, {selector:'span.day',order:'desc'});
-		if (filtered_items.length != 0) tinysort("#filtered>.subitem",{selector:'span.year',order:'desc'}, {selector:'span.month',order:'desc'}, {selector:'span.day',order:'desc'});
+		if (filtered_items.length != 0) tinysort("#filtered>.subitem",{selector:'span.year',order:'desc'}, {selector:'span.month',order:'desc'}, {selector:'span.day',order:'desc'},{selector:'span.item_id',order:'desc'});
 		else $("#filtered").append("<div class='empty'>No items here</div>");
 		
 	},

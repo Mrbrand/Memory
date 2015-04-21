@@ -387,7 +387,7 @@
 	});
 
 //swipe to backend menu
-	$("#tree").on('swipeleft',  function(){ 
+	$("#search").on('swipeleft',  function(){ 
 		if(Date.now()  - latest_swipe <200){
 			alert("2 left swipes -> Backdoor menu");
 			$(".json-output").val(JSON.stringify(window.localStorage.getItem("memory")));
