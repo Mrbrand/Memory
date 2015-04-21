@@ -207,6 +207,8 @@
 			<textarea class="json-input" rows="5" placeholder="JSON"></textarea>
 			<button onclick="myString = $('.json-input').val().replace('/[\r\n]/g', '<br />'); itemList.itemArray = JSON.parse(myString);">Till local</button><br/><br/>
 			
+			<button onclick="itemList.cleardata();">Till local</button><br/><br/>
+			
 			<input class="json-output" type="text" />
 			
 			
@@ -387,7 +389,7 @@
 	});
 
 //swipe to backend menu
-	$("#tree").on('swipeleft',  function(){ 
+	$("#search").on('swipeleft',  function(){ 
 		if(Date.now()  - latest_swipe <200){
 			alert("2 left swipes -> Backdoor menu");
 			$(".json-output").val(JSON.stringify(window.localStorage.getItem("memory")));
