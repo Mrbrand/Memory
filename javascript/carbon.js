@@ -29,14 +29,14 @@ var itemList = {
 	
 	exampledata : function() {   
 		this.itemArray = [];
-		this.add_item({id:100000, title:"Some memories", category:"Nöje", importance:3, notes: "Tjolahopp"});
+		this.add_item({id:100000, title:"Some memories", category:"Nöje", importance:3, notes: "Tjolahopp", year:2010, month:3, day: 19});
 		
 	},
 	
 	cleardata : function() {   
 		this.itemArray = [];
 		localStorage.removeItem('memory');
-		this.add_item({id:100000, title:"Some memories", category:"Nöje", importance:3, notes: "Tjolahopp"});
+		this.add_item({id:100000, title:"Some memories", category:"Nöje", importance:3, notes: "Tjolahopp", year:2010, month:3, day: 19});
 	},
 	
 	
