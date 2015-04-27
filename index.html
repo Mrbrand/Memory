@@ -156,7 +156,7 @@
 			</div><!-- end controls--> 
 			
 			
-			
+
 			<form id="new-item-form">
 				<textarea  id="new-item-title" name="title" placeholder="Title" rows="1" style="margin-bottom:5px;height:50px; font-size:1.3em; padding-top: 11px;"></textarea><br/>
 				
@@ -316,7 +316,7 @@
      	$(".month").val(edit_item.month);
      	$(".day").val(edit_item.day);
  		$(".importance").val(edit_item.importance);
-		
+		$(".category").val(edit_item.category);
 			/*$("input.item-category").val(current.category);
         $("input.item-create-date").val(current.date_create);
         $("input.item-finish-date").val(current.date_finished);*/
@@ -349,10 +349,10 @@
         
 		$(".menu-title").html("New: ");
       $("#new-item-title").val("");
-      $("#new-item-notes").val("");
+      $(".new-item-notes").val("");
       $(".category").val("");
       $(".importance").val("0");
-      
+      $(".importance").val("0");
       
   	
 		$(".page").hide();
