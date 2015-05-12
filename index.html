@@ -24,38 +24,12 @@
 	
 	<body>
 	
-	
-	
-		<!--TREE PAGE -------------->
-			<div id="tree" class="page" style="display:block; min-height:450px;">
-			  
-			<div id="header">
-				<div class="menu-title">Root</div>
-				<img class="search-button" src="img/search-icon.png"  style="float:right; margin:5px; cursor:pointer;"/>
-			</div> <!--end header-->
-			
-			<!--Sub-meny-->
-			<div class="submenu">
-				<button class="back-button">Back</button>
-				<button class="new-button">New</button>
-				
-			</div><!-- end controls-->
-			
-			<!-- Projektlista -->
-			<div id="items">
-				<div id="open"></div>
-				<div id="finished"></div>
-			</div><!-- end items--> 
-			
-		</div><!-- end page-->
-
-		
 		
 		<!--SEARCH PAGE -------------->
 			<div id="search" class="page" style="display:block;">
 			  
 			<div id="header">
-				<div style="float:left;">Search</div>
+				<button class="menu-button" style="float:left;">Menu</button>
 				<button class="new-button">New</button>
 			</div> <!--end header-->
 			
@@ -202,14 +176,22 @@
 			
 			<div id="header">
 				<div class="menu-title">MENU</div>
-				<img class="cancel-button" src="img/menu-button.png"  style="float:right; margin:5px;"/>
+				<button class="cancel-button">Back</button>
 			</div> <end header-->
 			<!--button onclick="window.open('mailto:test@example.com?subject=WiseGuy backup&body='+JSON.stringify(itemList.itemArray));">Mail backup</button-->
 			
 			<!--textarea class="json-input" rows="5" placeholder="JSON"></textarea>
 			<button onclick="myString = $('.json-input').val().replace('/[\r\n]/g', '<br />'); itemList.itemArray = JSON.parse(myString);">Till local</button><br/-->
 			<br/><br/>
-			<button onclick="itemList.cleardata();">Reset data</button><br/><br/>
+			<!--button onclick="itemList.cleardata();">Reset data</button><br/><br/-->
+			LOCAL STORAGE<br/><br/>
+			
+			Memory: <span id="memory"></span><br/>
+			<button onclick="itemList.backupmail('memory');">Backup Memory</button><br/><br/>
+			
+			Wiseguy: <span id="key"></span><br/>
+			<button onclick="itemList.backupmail('key');">Backup WiseGuy</button><br/><br/>
+						
 			
 			<!input class="json-output" type="text" />
 			
@@ -397,7 +379,9 @@
 	$("#search").on('swipeleft',  function(){ 
 		if(Date.now()  - latest_swipe <200){
 			alert("2 left swipes -> Backdoor menu");
-			$(".json-output").val(JSON.stringify(window.localStorage.getItem("memory")));
+			//$(".json-output").val(JSON.stringify(window.localStorage.getItem("memory")));
+			$("#memory").text(window.localStorage.getItem("memory").length);
+			$("#key").text(window.localStorage.getItem("key").length);
 			$(".page").hide();
 			$("#menu").show();
 		}
@@ -433,6 +417,8 @@
 
 	// .menu-button
     $(document).on('click', ".menu-button", function() {
+        	$("#memory").text(window.localStorage.getItem("memory").length);
+			$("#key").text(window.localStorage.getItem("key").length);
         	$(".page").hide();
 			$("#menu").show();
     });

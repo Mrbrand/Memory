@@ -38,6 +38,19 @@ var itemList = {
 		this.add_item({id:100000, title:"Some memories", category:"Nöje", importance:3, notes: "Tjolahopp", year:2010, month:3, day: 19});
 	},
 	
+	backupmail : function(key) {   
+		var subject = "Backup "+ key;
+		var content = window.localStorage.getItem(key);
+		var data = {subject: subject, content:content};
+		   $.post("http://betarabbit.com/resurs/mail/mail.php", data);
+		alert("Mail sent");
+		
+		/*$.post("http://betarabbit.com/resurs/mail/mail.php", function(data, status){
+        alert("Data: " + data + "\nStatus: " + status);
+    });*/
+    
+	},
+	
 	
 	init : function(key) {     
 		var array_from_storage = JSON.parse(window.localStorage.getItem(key));
