@@ -90,7 +90,13 @@ var itemList = {
 		
 		filtered_items.forEach(function(item) {
 			var monthNames = [ "?", "Jan", "Feb", "Mar", "Apr", "Maj", "Jun", "Jul", "Aug", "Sep", "Okt", "Nov", "Dec" ];
+			var weekDays = [ "?", "Mån", "Tis", "Ons", "Tor", "Fre", "Lör", "Sön"];
+			
+			
+			var date = item.year + "-"+('0' + item.month).slice(-2) +"-"+('0'+item.day).slice(-2);
 			item.month_name = monthNames[item.month];
+			item.week_day =  weekDays[moment(date,"YYYY-MM-DD").format("E")];
+			//item.week_day = "Mon";
 			var template = $('#filtered_items_template').html();
 			var html = Mustache.to_html(template, item);
 			$("#filtered").append(html);

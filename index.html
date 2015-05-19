@@ -204,42 +204,7 @@
 	</body>
 </html>
 
-
-
-<!-- Mustache template öppna-->
-<!--script id="open_items_template" type="text/template">
-	<div class="subitem project">
-						
-		<div class="subitem-left quick_edit_item">
-			<img class="prio-icon" src="img/prio5.png"/>
-			<!img class="type-icon" style="margin:4px 7px;" src="img/type{{type}}.png"/>
-			<div class="category" style="">{{category}}</div>
-			<img class="type-icon" style="margin:0;" src="img/size{{importance}}.png"/>
-		</div>
-		
-		<div class="subitem-center">
-			<div class="title" style="">{{title}}</div>
-			<div class="next_action_div" style="float:left;">
-			<span class="date">{{year}}-{{month}}-{{day}}</span><br/>
-				{{#notes}}<span class="notes">{{notes}}</span>{{/notes}}
-			</div>
-		</div><!-- end subitem-center -->
-		 
-		<!--div style="clear:both;"></div>
-		
-		<span class="item_id" style="display:none;">{{id}}</span>
-		<span class="importance" style="display:none;">{{importance}}</span>
-		
-		<span class="year" style="display:none;">{{year}}</span>
-		<span class="month" style="display:none;">{{month}}</span>
-		<span class="day" style="display:none;">{{day}}</span>
-		
-		
-	</div>
-</script>	
-	
-	
-<!-- Mustache template search -->
+<-- Mustache template search -->
 <script id="filtered_items_template" type="text/template">
 	<div class="subitem project">
 						
@@ -253,7 +218,7 @@
 		<div class="subitem-center">
 			<div class="title" style="">{{title}}</div>
 			<div class="next_action_div" style="float:left;">
-			<span class="date">{{day}} {{month_name}} {{year}}</span><br/>
+			<span class="date">{{week_day}} {{day}} {{month_name}} {{year}}</span><br/>
 				{{#notes}}<span class="notes">{{notes}}</span>{{/notes}}
 			</div>
 		</div><!-- end subitem-center -->
