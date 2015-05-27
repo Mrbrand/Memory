@@ -191,7 +191,12 @@
 			
 			Wiseguy: <span id="key"></span><br/>
 			<button onclick="itemList.backupmail('key');">Backup WiseGuy</button><br/><br/>
-						
+			
+			<form action="http://betarabbit.com/resurs/mail/mail.php" method="post">
+				<input type="text" name="content" value="whatever"/>
+				<input type="submit"  value="Ok"/>
+			</form>				
+			
 			
 			<!input class="json-output" type="text" />
 			
@@ -343,7 +348,7 @@
 //swipe to backend menu
 	$("#search").on('swipeleft',  function(){ 
 		if(Date.now()  - latest_swipe <1000){
-			alert("2 left swipes -> Backdoor menu");
+			//alert("2 left swipes -> Backdoor menu");
 			//$(".json-output").val(JSON.stringify(window.localStorage.getItem("memory")));
 			$("#memory").text(window.localStorage.getItem("memory").length);
 			$("#key").text(window.localStorage.getItem("key").length);
