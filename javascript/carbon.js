@@ -40,7 +40,9 @@ var itemList = {
 	
 	backupmail : function(key) {   
 		var subject = "Backup "+ key;
-		var content = window.localStorage.getItem(key);
+		//var content = window.localStorage.getItem(key);
+		var content = "Hej";
+
 		var data = {subject: subject, content:content};
 		   $.post("http://betarabbit.com/resurs/mail/mail.php", data);
 		alert("Mail sent");
