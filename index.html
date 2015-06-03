@@ -42,12 +42,16 @@
 				<!--Select type-->
 				<select class="type-filter" onchange="view_filter();">
 					<option value="all">-ALL-</option>
-		         <option value="Boende">Boende</option>
+		         <option value="Primärt">Primärt</option>
+		         <option value="Personligt">Personligt</option>
+		         <option value="Socialt">Socialt</option>
 		         <option value="Jobb/ Studier">Jobb/ Studier</option>
 		         <option value="Familj">Familj</option>
 		         <option value="Hälsa">Hälsa</option>
 		         <option value="Webb">Webb</option>
 		         <option value="Nöje">Nöje</option>
+		          <option value="Engagemang">Engagemang</option>
+		          <option value="Boende">Boende</option>
 				</select>
 				
 				
@@ -86,13 +90,17 @@
 				
 		     <select class="category" name="category" style="margin-bottom:5px;height:40px;">
 		         <option value="">--Kategori--</option>
-		         <option value="Boende">Boende</option>
+		         
+		         <option value="Primärt">Primärt</option>
+		         <option value="Personligt">Personligt</option>
+		         <option value="Socialt">Socialt</option>
 		         <option value="Jobb/ Studier">Jobb/ Studier</option>
 		         <option value="Familj">Familj</option>
 		         <option value="Hälsa">Hälsa</option>
 		         <option value="Webb">Webb</option>
 		         <option value="Nöje">Nöje</option>
 		          <option value="Engagemang">Engagemang</option>
+		          <option value="Boende">Boende</option>
 		     </select><br/>
 				
 				<select class="importance" name="importance" style="margin-bottom:5px;height:40px;">
@@ -141,13 +149,16 @@
 				
 		     <select class="category" name="category" style="margin-bottom:5px;height:40px;">
 		         <option value="">--Kategori--</option>
-		         <option value="Boende">Boende</option>
 		         <option value="Jobb/ Studier">Jobb/ Studier</option>
+		         <option value="Primärt">Primärt</option>
+		         <option value="Personligt">Personligt</option>
+		         <option value="Socialt">Socialt</option>
 		         <option value="Familj">Familj</option>
 		         <option value="Hälsa">Hälsa</option>
 		         <option value="Webb">Webb</option>
 		         <option value="Nöje">Nöje</option>
 		         <option value="Engagemang">Engagemang</option>
+		         <option value="Boende">Boende</option>
 		     </select><br/>
 				
 				<select class="importance" name="importance" style="margin-bottom:5px;height:40px;">
@@ -187,29 +198,22 @@
 			LOCAL STORAGE<br/><br/>
 			
 			Memory: <span id="memory"></span><br/>
-			<button onclick="itemList.backupmail('memory');">Backup Memory</button><br/><br/>
+			<button  onclick="$('#output').val(window.localStorage.getItem('memory'));">Backup Memory</button><br/><br/>
 			
 			Wiseguy: <span id="key"></span><br/>
-			<button onclick="itemList.backupmail('key');">Backup WiseGuy</button><br/><br/>
+			<button onclick="$('#output').val(window.localStorage.getItem('key'));">Backup WiseGuy</button><br/><br/>
 			
 			<form action="http://betarabbit.com/resurs/mail/mail.php" method="post">
-				<textarea id="memoryoutput" name="content" ></textarea>
+				<textarea id="output" name="content" ></textarea>
 				<input type="submit"  value="Ok"/>
 			</form>				
 			
-			
-			<!input class="json-output" type="text" />
-			
-			
-			<!--span style="color:white;">These functions are experimental, use with caution!</span> <br/>
-			<button onclick="if (confirm('Previous data will be erased!')==true) {itemList.cleardata(); view_item(0);}" style="margin:10px;">Clear data</button><br/>
-			<button onclick="if (confirm('Previous data will be erased!')==true) {itemList.testdata(); itemList.refresh(0);view_item(0);}" style="margin:10px;">Test data (50000 randomized items)</button><br/>
-
+		
 		</div><!-- end menu--> 
 	</body>
 </html>
 
-<-- Mustache template search -->
+<!-- Mustache template search -->
 <script id="filtered_items_template" type="text/template">
 	<div class="subitem project">
 						
@@ -305,8 +309,7 @@
       $("#new-item-title").val("");
       $(".new-item-notes").val("");
       $(".category").val("");
-      $(".importance").val("0");
-      $(".importance").val("0");
+      $(".importance").val("1");
       
   	
 		$(".page").hide();
