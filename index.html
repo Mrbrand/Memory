@@ -198,20 +198,32 @@
 			LOCAL STORAGE<br/><br/>
 			
 			Memory: <span id="memory"></span><br/>
-			<button  onclick="$('#output').val(window.localStorage.getItem('memory'));">Backup Memory</button><br/><br/>
+			<button  onclick="$('#output').text(window.localStorage.getItem('memory'));$('.page').hide();$('#backup').show();">Backup Memory</button><br/><br/>
 			
 			Wiseguy: <span id="key"></span><br/>
 			<button onclick="$('#output').val(window.localStorage.getItem('key'));">Backup WiseGuy</button><br/><br/>
 			
-			<form action="http://betarabbit.com/resurs/mail/mail.php" method="post">
+			<!--form action="http://betarabbit.com/resurs/mail/mail.php" method="post">
 				<textarea id="output" name="content" ></textarea>
 				<input type="submit"  value="Ok"/>
-			</form>				
+			</form-->				
 			
 		
 		</div><!-- end menu--> 
+
+<!BACKUP >
+		<div id="backup" class="page">
+			
+			<pre id="output" style="font-size:6pt;color:white;"></pre>
+		
+		</div><!-- end menu--> 
+
+
+
+
 	</body>
 </html>
+
 
 <!-- Mustache template search -->
 <script id="filtered_items_template" type="text/template">
